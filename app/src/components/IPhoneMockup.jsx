@@ -387,7 +387,7 @@ const VOICE_TIMING = {
 }
 
 /* ---------- VoiceScreen ---------- */
-function VoiceScreen({ scriptKey, onComplete, onAction }) {
+function VoiceScreen({ scriptKey, onComplete, onAction, voiceEnabled }) {
   const [visibleCount, setVisibleCount] = useState(0)
   const [phase, setPhase] = useState(ELEVENLABS_KEY ? 'loading' : 'listening')
   const scrollRef = useRef(null)
@@ -403,7 +403,7 @@ function VoiceScreen({ scriptKey, onComplete, onAction }) {
 
     const run = async () => {
       // Pre-fetch first 2 messages during initial delay (within concurrency limit)
-      const prefetch = ELEVENLABS_KEY
+      const prefetch = (voiceEnabled && ELEVENLABS_KEY)
         ? messages.slice(0, 2).map(msg =>
             fetchTTS(msg.text, msg.from === 'user' ? VOICE_IDS.customer : VOICE_IDS.buddy)
               .catch(() => null)
@@ -423,7 +423,7 @@ function VoiceScreen({ scriptKey, onComplete, onAction }) {
 
         // Fetch on-demand if not prefetched
         let audioUrl = audioCache[i] || null
-        if (!audioUrl && ELEVENLABS_KEY) {
+        if (!audioUrl && voiceEnabled && ELEVENLABS_KEY) {
           audioUrl = await Promise.race([
             fetchTTS(msg.text, msg.from === 'user' ? VOICE_IDS.customer : VOICE_IDS.buddy).catch(() => null),
             sleep(8000).then(() => null),
@@ -431,7 +431,7 @@ function VoiceScreen({ scriptKey, onComplete, onAction }) {
         }
 
         // Kick off next fetch while current plays
-        if (ELEVENLABS_KEY && i + 1 < messages.length && !audioCache[i + 1]) {
+        if (voiceEnabled && ELEVENLABS_KEY && i + 1 < messages.length && !audioCache[i + 1]) {
           const nextMsg = messages[i + 1]
           fetchTTS(nextMsg.text, nextMsg.from === 'user' ? VOICE_IDS.customer : VOICE_IDS.buddy)
             .then(url => { audioCache[i + 1] = url })
@@ -630,7 +630,7 @@ function VoiceScreen({ scriptKey, onComplete, onAction }) {
 }
 
 /* ---------- component ---------- */
-export default function IPhoneMockup({ scenario, onAction, onScenarioChange, buddyPush }) {
+export default function IPhoneMockup({ scenario, onAction, onScenarioChange, buddyPush, voiceEnabled }) {
   const [highlightTap, setHighlightTap] = useState(null)
   const [subScreen, setSubScreen] = useState(null)
   const [buddyNotif, setBuddyNotif] = useState(null)
@@ -883,6 +883,7 @@ export default function IPhoneMockup({ scenario, onAction, onScenarioChange, bud
             scriptKey={voiceMode}
             onComplete={handleVoiceComplete}
             onAction={onAction}
+            voiceEnabled={voiceEnabled}
           />
         )}
 
@@ -1130,7 +1131,7 @@ function HomeScreen({ onTap, highlight, postVoice }) {
           padding: '10px 12px', borderBottom: '1px solid #eee',
         }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F3CC9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span style={{ fontSize: 12, fontWeight: 500, flex: 1 }}>Postpaid 97XXXXXX43</span>
+          <span style={{ fontSize: 12, fontWeight: 500, flex: 1 }}>Prepaid 97XXXXXX43</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </div>
         <div style={{ display: 'flex' }}>
@@ -1261,7 +1262,7 @@ function MobileScreen({ onTap, onBack, postVoice }) {
       }}>
         <div style={{ padding: '10px 12px', borderBottom: '1px solid #eee', display: 'flex', alignItems: 'center', gap: 8 }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F3CC9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          <span style={{ fontSize: 12, fontWeight: 500 }}>Postpaid 97XXXXXX43</span>
+          <span style={{ fontSize: 12, fontWeight: 500 }}>Prepaid 97XXXXXX43</span>
           <span style={{ fontSize: 9, color: '#00C853', fontWeight: 600, marginLeft: 'auto' }}>Active</span>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0 }}>
