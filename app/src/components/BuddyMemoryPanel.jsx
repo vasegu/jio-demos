@@ -7,13 +7,14 @@ const BUDDY_MEMORY = {
     { label: 'Year 4+', desc: 'Jio feels irreplaceable', color: '#D9008D' },
   ]},
   memory: [
+    { signal: 'Exam week detected for Rishika', source: 'LifeGraph', age: '3 days' },
+    { signal: 'Flight to Singapore on Mar 24', source: 'Network Agent', age: '2 days' },
+    { signal: 'Watches every MI match — IPL season active', source: 'LifeGraph', age: '1 week' },
+    { signal: 'Last trip data usage: ~1.5 GB/day', source: 'Network Agent', age: '3 months' },
+    { signal: 'Family: Rishika (daughter), Aymaan (son)', source: 'Profile', age: '12 months' },
     { signal: 'Morning commuter pattern (8-9 AM)', source: 'LifeGraph', age: '14 months' },
     { signal: 'Movie night Fridays', source: 'LifeGraph', age: '11 months' },
-    { signal: 'Family: Rishika (daughter), Aymaan (son)', source: 'Profile', age: '12 months' },
     { signal: 'Prefers voice ordering for groceries', source: 'Commerce', age: '6 months' },
-    { signal: 'AI Plus tier \u2014 high token usage', source: 'Plan Agent', age: '8 months' },
-    { signal: 'Food delivery spend trending 32% higher', source: 'Retention Agent', age: '2 weeks' },
-    { signal: 'Exam week detected for Rishika', source: 'LifeGraph', age: '3 days' },
   ],
   agentSignals: {
     home: [
@@ -73,7 +74,7 @@ const sectionMeta = {
 
 const SOURCE_COLORS = {
   LifeGraph: '#0F3CC9', Profile: '#00C853', Commerce: '#EFA73D',
-  'Plan Agent': '#7B1FA2', 'Retention Agent': '#DA2441',
+  'Plan Agent': '#7B1FA2', 'Retention Agent': '#DA2441', 'Network Agent': '#29B6F6',
 }
 
 const AGENT_COLORS = {

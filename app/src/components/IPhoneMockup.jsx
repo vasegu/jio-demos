@@ -263,6 +263,7 @@ const VOICE_SCRIPTS = {
   'roaming': {
     targetScenario: 'home',
     targetSubScreen: 'mobile',
+    timing: { initialDelay: 500, userMessageDelay: 800, buddyCharRate: 20, minBuddyDuration: 1000, turnGap: 500, postPause: 1000, fadeOut: 600 },
     messages: [
       { from: 'user', text: 'Buddy, I am going to Singapore next week.' },
       { from: 'buddy', text: 'Nice, Singapore. Based on your last trip I think you will need about 1.5 GB a day. The Asia Roaming Pack is perfect -- 599 rupees for 7 days with 2 GB daily, so you have plenty of headroom. Want me to add it?' },
@@ -393,6 +394,7 @@ function VoiceScreen({ scriptKey, onComplete, onAction }) {
   const currentAudioRef = useRef(null)
   const script = VOICE_SCRIPTS[scriptKey]
   const messages = script?.messages || []
+  const t = { ...VOICE_TIMING, ...script?.timing }
 
   useEffect(() => {
     if (!messages.length) return
@@ -409,7 +411,7 @@ function VoiceScreen({ scriptKey, onComplete, onAction }) {
         : []
       const audioCache = []
 
-      await sleep(VOICE_TIMING.initialDelay)
+      await sleep(t.initialDelay)
 
       // Resolve prefetched
       const prefetched = await Promise.all(prefetch)
@@ -460,19 +462,19 @@ function VoiceScreen({ scriptKey, onComplete, onAction }) {
           currentAudioRef.current = null
         } else {
           const duration = msg.from === 'user'
-            ? VOICE_TIMING.userMessageDelay
-            : Math.max(VOICE_TIMING.minBuddyDuration, msg.text.length * VOICE_TIMING.buddyCharRate)
+            ? t.userMessageDelay
+            : Math.max(t.minBuddyDuration, msg.text.length * t.buddyCharRate)
           await sleep(duration)
         }
 
-        if (i < messages.length - 1) await sleep(VOICE_TIMING.turnGap)
+        if (i < messages.length - 1) await sleep(t.turnGap)
       }
 
       if (cancelled) return
 
-      await sleep(VOICE_TIMING.postPause)
+      await sleep(t.postPause)
       setPhase('transitioning')
-      await sleep(VOICE_TIMING.fadeOut)
+      await sleep(t.fadeOut)
       onAction({ type: 'voice-complete', item: script.targetScenario, scenario: scriptKey })
       onComplete(script.targetScenario, scriptKey)
     }
@@ -1006,7 +1008,7 @@ function HomeScreen({ onTap, highlight, postVoice }) {
         }}
       >
         {icons.mic('#fff')}
-        <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 12, fontWeight: 500, fontFamily: 'var(--font)', letterSpacing: '0.02em' }}>Ask Jio anything...</span>
+        <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 12, fontWeight: 500, fontFamily: 'var(--font)', letterSpacing: '0.02em' }}>Ask Buddy anything...</span>
       </div>
 
       {/* Service Grid */}
@@ -1061,11 +1063,11 @@ function HomeScreen({ onTap, highlight, postVoice }) {
         borderRadius: 12, padding: 14, marginBottom: 10,
         color: '#fff', position: 'relative',
       }}>
-        <div style={{ fontSize: 11, opacity: 0.8, marginBottom: 4 }}>AI Plus</div>
+        <div style={{ fontSize: 11, opacity: 0.8, marginBottom: 4 }}>JioTrue5G</div>
         <div style={{ fontWeight: 700, fontSize: 16, lineHeight: 1.2 }}>
-          5x more tokens<br/>Advanced reasoning
+          Unlimited 5G data<br/>at no extra cost
         </div>
-        <div style={{ fontSize: 10, opacity: 0.7, marginTop: 4 }}>Upgrade your AI — studies, work, creative tools</div>
+        <div style={{ fontSize: 10, opacity: 0.7, marginTop: 4 }}>Blazing speeds on India's largest True5G network</div>
         <button
           onClick={() => onTap('promo', 'promo-tap')}
           style={{
@@ -1075,7 +1077,7 @@ function HomeScreen({ onTap, highlight, postVoice }) {
             fontFamily: 'var(--font)',
           }}
         >
-          Upgrade Now
+          Check Coverage
         </button>
         <div style={{
           position: 'absolute', bottom: 8, right: 14,

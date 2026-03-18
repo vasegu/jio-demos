@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import IPhoneMockup from './components/IPhoneMockup'
 import AILayer from './components/AILayer'
 import Dashboard from './components/Dashboard'
@@ -53,6 +53,7 @@ export default function App() {
   const [totalTokens, setTotalTokens] = useState(0)
   const [profileOpen, setProfileOpen] = useState(false)
   const [buddyPush, setBuddyPush] = useState(null)
+  const [paneCount, setPaneCount] = useState(1)
 
   const handleAgentPush = (agent, signal, accent) => {
     setBuddyPush({ title: 'Buddy', subtitle: agent, body: signal, accent, id: Date.now() })
@@ -147,17 +148,23 @@ export default function App() {
       {/* ── Panel Layout ── */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: profileOpen ? '310px 380px 1fr 360px' : '310px 380px 1fr',
+        gridTemplateColumns:
+          paneCount === 1 ? '1fr' :
+          paneCount === 2 ? '310px 1fr' :
+          paneCount === 3 ? (profileOpen ? '310px 380px 1fr 360px' : '310px 380px 1fr') :
+          '310px 380px 1fr 360px',
         gridTemplateRows: 'auto 1fr',
         flex: 1,
         overflow: 'hidden',
+        position: 'relative',
+        transition: 'grid-template-columns 0.4s ease',
       }}>
         {/* Column Headers */}
         {[
           { label: 'Customer Touchpoint', sub: 'Every interaction becomes a signal', bg: '#f0f2f5', border: '1px solid var(--jio-border)' },
-          { label: 'Real-time Intelligence', sub: 'Every signal becomes insight', bg: 'var(--jio-bg)', border: '1px solid var(--jio-border-light)' },
-          { label: 'Business Outcomes', sub: 'Every insight drives an outcome', bg: 'var(--jio-bg)', border: profileOpen ? '1px solid var(--jio-border-light)' : 'none' },
-          ...(profileOpen ? [{ label: 'Customer Graph', sub: 'Every outcome deepens the graph', bg: 'var(--jio-bg)', border: 'none' }] : []),
+          ...(paneCount >= 2 ? [{ label: 'Real-time Intelligence', sub: 'Every signal becomes insight', bg: 'var(--jio-bg)', border: '1px solid var(--jio-border-light)' }] : []),
+          ...(paneCount >= 3 ? [{ label: 'Business Outcomes', sub: 'Every insight drives an outcome', bg: 'var(--jio-bg)', border: (paneCount >= 4 || profileOpen) ? '1px solid var(--jio-border-light)' : 'none' }] : []),
+          ...((paneCount >= 4 || (paneCount >= 3 && profileOpen)) ? [{ label: 'Customer Graph', sub: 'Every outcome deepens the graph', bg: 'var(--jio-bg)', border: 'none' }] : []),
         ].map((col) => (
           <div key={col.label} style={{
             background: col.bg,
@@ -192,7 +199,7 @@ export default function App() {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '12px 16px 20px',
-          borderRight: '1px solid var(--jio-border)',
+          borderRight: paneCount >= 2 ? '1px solid var(--jio-border)' : 'none',
         }}>
           <IPhoneMockup
             scenario={activeScenario}
@@ -203,37 +210,84 @@ export default function App() {
         </div>
 
         {/* Panel 2: AI Layer */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          background: 'var(--jio-bg)',
-          borderRight: '1px solid var(--jio-border-light)',
-        }}>
-          <AILayer events={aiEvents} scenario={SCRIPT_PARENT[activeScenario] || activeScenario} totalTokens={totalTokens} />
-        </div>
+        {paneCount >= 2 && (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            background: 'var(--jio-bg)',
+            borderRight: '1px solid var(--jio-border-light)',
+            animation: 'fadeIn 0.3s ease',
+          }}>
+            <AILayer events={aiEvents} scenario={SCRIPT_PARENT[activeScenario] || activeScenario} totalTokens={totalTokens} />
+          </div>
+        )}
 
         {/* Panel 3: Dashboard */}
-        <div style={{
-          background: 'var(--jio-bg)',
-          overflow: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-        }}>
-          <Dashboard data={dashboardData} scenario={SCRIPT_PARENT[activeScenario] || activeScenario} events={aiEvents} totalTokens={totalTokens} onArjunClick={() => setProfileOpen(!profileOpen)} compact={profileOpen} />
-        </div>
+        {paneCount >= 3 && (
+          <div style={{
+            background: 'var(--jio-bg)',
+            overflow: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            animation: 'fadeIn 0.3s ease',
+          }}>
+            <Dashboard data={dashboardData} scenario={SCRIPT_PARENT[activeScenario] || activeScenario} events={aiEvents} totalTokens={totalTokens} onArjunClick={() => {
+              if (paneCount >= 3) { setProfileOpen(!profileOpen); if (paneCount === 3) setPaneCount(4) }
+            }} compact={paneCount >= 4 || profileOpen} />
+          </div>
+        )}
 
         {/* Panel 4: Buddy Memory */}
-        {profileOpen && (
+        {(paneCount >= 4 || (paneCount >= 3 && profileOpen)) && (
           <div style={{
             background: 'var(--jio-bg)',
             overflow: 'auto',
             display: 'flex',
             flexDirection: 'column',
             borderLeft: '1px solid var(--jio-border-light)',
+            animation: 'fadeIn 0.3s ease',
           }}>
-            <BuddyMemoryPanel scenario={SCRIPT_PARENT[activeScenario] || activeScenario} onClose={() => setProfileOpen(false)} onPushToPhone={handleAgentPush} />
+            <BuddyMemoryPanel scenario={SCRIPT_PARENT[activeScenario] || activeScenario} onClose={() => { setProfileOpen(false); if (paneCount === 4) setPaneCount(3) }} onPushToPhone={handleAgentPush} />
           </div>
+        )}
+
+        {/* ── Advance / Back arrows ── */}
+        {paneCount < 3 && (
+          <button
+            onClick={() => setPaneCount(p => Math.min(p + 1, 4))}
+            style={{
+              position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)',
+              width: 40, height: 40, borderRadius: '50%',
+              background: 'var(--jio-blue)', border: 'none', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 2px 12px rgba(15,60,201,0.3)',
+              transition: 'opacity 0.2s',
+              zIndex: 10,
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        )}
+        {paneCount > 1 && paneCount < 4 && (
+          <button
+            onClick={() => { setPaneCount(p => Math.max(p - 1, 1)); setProfileOpen(false) }}
+            style={{
+              position: 'absolute', left: paneCount === 2 ? 294 : 16, bottom: 16,
+              width: 32, height: 32, borderRadius: '50%',
+              background: 'rgba(0,0,0,0.06)', border: '1px solid var(--jio-border)',
+              cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'opacity 0.2s',
+              zIndex: 10,
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--jio-grey)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
         )}
       </div>
     </div>
