@@ -702,9 +702,9 @@ export default function IPhoneMockup({ scenario, onAction, onScenarioChange, bud
       else if (item === 'Finance') { setPhoneScenario('finance'); setSubScreen(null) }
       else if (item === 'Play') { setPhoneScenario('home'); setSubScreen('entertainment') }
       else if (item === 'Cloud') { setPhoneScenario('home'); setSubScreen('aicloud') }
-      else if (item === 'Orders') { /* already on commerce */ }
-      else if (item === 'Nearby' || item === 'Track' || item === 'Account') { /* stay on commerce */ }
-      else if (item === 'Pay' || item === 'Scan' || item === 'History' || item === 'More') { /* stay on finance */ }
+      else if (item === 'Orders') { setPhoneScenario('home'); setSubScreen(null) }
+      else if (item === 'Nearby' || item === 'Track' || item === 'Account') { setPhoneScenario('home'); setSubScreen(null) }
+      else if (item === 'Pay' || item === 'Scan' || item === 'History' || item === 'More') { setPhoneScenario('home'); setSubScreen(null) }
     }
     if (type === 'nav-back') {
       setPhoneScenario('home')

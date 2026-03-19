@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import IPhoneMockup from './components/IPhoneMockup'
 import AILayer from './components/AILayer'
 import Dashboard from './components/Dashboard'
 import BuddyMemoryPanel from './components/BuddyMemoryPanel'
+import PresentationTour from './components/PresentationTour'
 import jioLogo from './assets/jio-logo-white.svg'
 
 const SCENARIOS = [
   { id: 'home', label: 'MyJio Home', sub: 'Super-app overview' },
-  { id: 'slices-ipl', label: 'Match Night', sub: 'Smart home bandwidth' },
+  { id: 'run-diagnostics', label: 'Slow Wi-Fi', sub: 'AI diagnostics' },
   { id: 'roaming', label: 'Singapore Trip', sub: 'Travel-ready network' },
+  { id: 'slices-ipl', label: 'Match Night', sub: 'Smart home bandwidth' },
   { id: 'buy-booster', label: 'Running Low', sub: 'Predictive top-up' },
   { id: 'reorder-groceries', label: 'Weekly Shop', sub: 'Voice commerce' },
   { id: 'pay-contact', label: 'Pay Rahul', sub: 'Fraud detection & UPI' },
-  { id: 'run-diagnostics', label: 'Slow Wi-Fi', sub: 'AI diagnostics' },
 ]
 
 const SCRIPT_PARENT = {
@@ -46,7 +47,189 @@ const AccentureLogo = () => (
   </svg>
 )
 
+/* ---------- Password Gate ---------- */
+function PasswordGate({ onSuccess }) {
+  const [pw, setPw] = useState('')
+  const [error, setError] = useState(false)
+  const inputRef = useRef(null)
+
+  useEffect(() => { inputRef.current?.focus() }, [])
+
+  const submit = () => {
+    if (pw === 'JioBuddy') {
+      onSuccess()
+    } else {
+      setError(true)
+      setTimeout(() => setError(false), 600)
+      setPw('')
+    }
+  }
+
+  return (
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 1000,
+      background: 'linear-gradient(135deg, var(--jio-deep-blue) 0%, #061654 100%)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      fontFamily: 'var(--font)',
+    }}>
+      <div style={{
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24,
+        animation: 'fadeUp 0.4s ease',
+      }}>
+        <img src={jioLogo} alt="Jio" style={{ height: 40 }} />
+        <div style={{
+          fontSize: 22, fontWeight: 700, color: '#fff',
+          letterSpacing: '0.02em',
+        }}>
+          Jio Buddy
+        </div>
+        <div style={{
+          fontSize: 12, fontWeight: 300, color: 'rgba(255,255,255,0.45)',
+          letterSpacing: '0.02em', marginTop: -12,
+        }}>
+          Enter password to continue
+        </div>
+        <div style={{
+          display: 'flex', gap: 10,
+          animation: error ? 'shake 0.4s ease' : 'none',
+        }}>
+          <input
+            ref={inputRef}
+            type="password"
+            value={pw}
+            onChange={e => setPw(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && submit()}
+            autoComplete="off"
+            placeholder="Password"
+            style={{
+              width: 220,
+              padding: '10px 20px',
+              borderRadius: 100,
+              border: `1px solid ${error ? 'var(--jio-red)' : 'rgba(255,255,255,0.15)'}`,
+              background: 'rgba(255,255,255,0.06)',
+              color: '#fff',
+              fontSize: 14,
+              fontWeight: 500,
+              fontFamily: 'var(--font)',
+              letterSpacing: '0.02em',
+              outline: 'none',
+              textAlign: 'center',
+              transition: 'border-color 0.2s',
+            }}
+          />
+          <button
+            onClick={submit}
+            style={{
+              padding: '10px 24px',
+              borderRadius: 100,
+              border: 'none',
+              background: 'var(--jio-blue)',
+              color: '#fff',
+              fontSize: 13,
+              fontWeight: 700,
+              fontFamily: 'var(--font)',
+              letterSpacing: '0.02em',
+              cursor: 'pointer',
+            }}
+          >
+            Enter
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ---------- Mode Selection ---------- */
+function ModeSelect({ onSelect }) {
+  const [hover, setHover] = useState(null)
+
+  const cards = [
+    {
+      id: 'presentation',
+      title: 'Presentation',
+      sub: 'Guided walkthrough with script',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+      ),
+    },
+    {
+      id: 'demo',
+      title: 'Demo',
+      sub: 'Free-form exploration',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+      ),
+    },
+  ]
+
+  return (
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 1000,
+      background: 'linear-gradient(135deg, var(--jio-deep-blue) 0%, #061654 100%)',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      fontFamily: 'var(--font)', gap: 40,
+    }}>
+      <div style={{ animation: 'fadeUp 0.3s ease', textAlign: 'center' }}>
+        <img src={jioLogo} alt="Jio" style={{ height: 32, marginBottom: 16 }} />
+        <div style={{ fontSize: 18, fontWeight: 700, color: '#fff', letterSpacing: '0.02em' }}>
+          Choose Mode
+        </div>
+      </div>
+      <div style={{ display: 'flex', gap: 24, animation: 'fadeUp 0.4s ease' }}>
+        {cards.map(card => (
+          <button
+            key={card.id}
+            onClick={() => onSelect(card.id)}
+            onMouseEnter={() => setHover(card.id)}
+            onMouseLeave={() => setHover(null)}
+            style={{
+              width: 200, padding: '36px 24px',
+              borderRadius: 12,
+              border: '1px solid rgba(255,255,255,0.12)',
+              background: hover === card.id ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.04)',
+              cursor: 'pointer',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16,
+              transition: 'all 0.2s ease',
+              fontFamily: 'var(--font)',
+            }}
+          >
+            <div style={{
+              width: 56, height: 56, borderRadius: 12,
+              background: 'var(--jio-blue)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              {card.icon}
+            </div>
+            <div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', letterSpacing: '0.02em', marginBottom: 4 }}>
+                {card.title}
+              </div>
+              <div style={{ fontSize: 11, fontWeight: 300, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.02em' }}>
+                {card.sub}
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ---------- Main App ---------- */
 export default function App() {
+  const [authState, setAuthState] = useState('locked') // 'locked' | 'modeSelect' | 'ready'
+  const [appMode, setAppMode] = useState(null) // null | 'presentation' | 'demo'
+
   const [activeScenario, setActiveScenario] = useState('home')
   const [aiEvents, setAiEvents] = useState([])
   const [dashboardData, setDashboardData] = useState({ eventCount: 0 })
@@ -55,6 +238,20 @@ export default function App() {
   const [buddyPush, setBuddyPush] = useState(null)
   const [paneCount, setPaneCount] = useState(1)
   const [voiceEnabled, setVoiceEnabled] = useState(false)
+
+  const panelRefs = useRef([null, null, null, null])
+  const voiceToggleRef = useRef(null)
+
+  const handleModeSelect = (mode) => {
+    setAppMode(mode)
+    setAuthState('ready')
+    setActiveScenario('home')
+    setPaneCount(1)
+    setProfileOpen(false)
+    setAiEvents([])
+    setTotalTokens(0)
+    setDashboardData({ eventCount: 0 })
+  }
 
   const handleAgentPush = (agent, signal, accent) => {
     setBuddyPush({ title: 'Buddy', subtitle: agent, body: signal, accent, id: Date.now() })
@@ -73,6 +270,18 @@ export default function App() {
         eventCount: (prev?.eventCount || 0) + 1,
       }))
     }, 800)
+  }
+
+  const isPresentation = appMode === 'presentation'
+
+  // Password gate
+  if (authState === 'locked') {
+    return <PasswordGate onSuccess={() => setAuthState('modeSelect')} />
+  }
+
+  // Mode selection
+  if (authState === 'modeSelect') {
+    return <ModeSelect onSelect={handleModeSelect} />
   }
 
   return (
@@ -116,17 +325,19 @@ export default function App() {
                 key={s.id}
                 onClick={() => setActiveScenario(s.id)}
                 style={{
-                  background: 'transparent',
+                  background: (isPresentation && active) ? 'rgba(255,255,255,0.1)' : 'transparent',
                   border: 'none',
                   borderBottom: active ? '2px solid #fff' : '2px solid transparent',
                   padding: '0 14px',
                   fontFamily: 'var(--font)',
                   cursor: 'pointer',
-                  transition: 'all 0.15s',
+                  transition: 'all 0.25s',
                   letterSpacing: '0.02em',
                   height: '100%',
                   display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                   gap: 1,
+                  borderRadius: isPresentation ? '8px 8px 0 0' : 0,
+                  boxShadow: (isPresentation && active) ? '0 0 20px rgba(255,255,255,0.2), inset 0 0 8px rgba(255,255,255,0.05)' : 'none',
                 }}
               >
                 <span style={{
@@ -193,7 +404,7 @@ export default function App() {
         ))}
 
         {/* Panel 1: iPhone */}
-        <div style={{
+        <div ref={el => panelRefs.current[0] = el} style={{
           background: '#f0f2f5',
           display: 'flex',
           flexDirection: 'column',
@@ -205,12 +416,13 @@ export default function App() {
           <IPhoneMockup
             scenario={activeScenario}
             onAction={handleUserAction}
-            onScenarioChange={setActiveScenario}
+            onScenarioChange={isPresentation ? () => {} : setActiveScenario}
             buddyPush={buddyPush}
             voiceEnabled={voiceEnabled}
           />
           {/* ElevenLabs Voice Toggle */}
           <button
+            ref={voiceToggleRef}
             onClick={() => setVoiceEnabled(v => !v)}
             style={{
               display: 'flex', alignItems: 'center', gap: 6,
@@ -241,7 +453,7 @@ export default function App() {
 
         {/* Panel 2: AI Layer */}
         {paneCount >= 2 && (
-          <div style={{
+          <div ref={el => panelRefs.current[1] = el} style={{
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
@@ -255,7 +467,7 @@ export default function App() {
 
         {/* Panel 3: Dashboard */}
         {paneCount >= 3 && (
-          <div style={{
+          <div ref={el => panelRefs.current[2] = el} style={{
             background: 'var(--jio-bg)',
             overflow: 'auto',
             display: 'flex',
@@ -270,7 +482,7 @@ export default function App() {
 
         {/* Panel 4: Buddy Memory */}
         {(paneCount >= 4 || (paneCount >= 3 && profileOpen)) && (
-          <div style={{
+          <div ref={el => panelRefs.current[3] = el} style={{
             background: 'var(--jio-bg)',
             overflow: 'auto',
             display: 'flex',
@@ -320,6 +532,21 @@ export default function App() {
           </button>
         )}
       </div>
+
+      {/* ── Presentation Tour Overlay ── */}
+      {isPresentation && (
+        <PresentationTour
+          panelRefs={panelRefs}
+          voiceToggleRef={voiceToggleRef}
+          onPaneCountChange={setPaneCount}
+          onScenarioChange={setActiveScenario}
+          onProfileOpenChange={setProfileOpen}
+          onClose={() => {
+            setAuthState('modeSelect')
+            setAppMode(null)
+          }}
+        />
+      )}
     </div>
   )
 }
