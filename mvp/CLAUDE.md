@@ -12,7 +12,7 @@ Signal drops → store in human memory → customer comes back online → voice 
 ## Directory Structure
 
 ```
-jio-cx/
+mvp/
 ├── .claude/          ← Claude Code skills (basecamp, go_hunt, hypotheses, log_session)
 ├── docs/             ← Investigation layer (ARCHITECTURE, GOOGLE-STACK, SPRINT-PLAN, etc.)
 ├── discovery/        ← Stream outputs
