@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-Week Sprint — Jio Super-App</title>
+
+  <style>
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Light.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Light.ttf') format('truetype');
+      font-weight: 300;
+    }
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Medium.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Medium.ttf') format('truetype');
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Bold.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Bold.ttf') format('truetype');
+      font-weight: 700;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #0F3CC9;
+      --deep: #0a2885;
+      --black: #141414;
+      --grey: rgba(0,0,0,0.6);
+      --grey-m: rgba(0,0,0,0.32);
+      --border: #E0E0E0;
+      --tint: #E7EBF8;
+      --tint2: #dde3f6;
+      --font: 'JioType', 'Nunito', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font); color: var(--black);
+      background: #fff; letter-spacing: 0.02em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .slide {
+      width: 1440px; height: 810px;
+      margin: 0 auto; padding: 40px 56px 28px;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+
+    /* Header */
+    .eyebrow {
+      font-size: 12px; font-weight: 500; color: var(--grey);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;
+    }
+    .title {
+      font-size: 30px; font-weight: 700; color: var(--black); margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 13px; font-weight: 500; color: var(--grey);
+      margin-bottom: 22px; line-height: 1.5;
+    }
+
+    /* ── Timeline rule ── */
+    .timeline-rule {
+      display: grid;
+      grid-template-columns: 180px 1fr 220px;
+      align-items: center;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .tl-start {
+      font-size: 10px; font-weight: 700; color: var(--blue);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tl-bar {
+      position: relative; height: 20px; display: flex; align-items: center;
+    }
+    .tl-line {
+      position: absolute; left: 0; right: 0; height: 1px;
+      background: var(--border);
+    }
+    .tl-mid {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column-reverse; align-items: center; gap: 2px;
+    }
+    .tl-mid-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue); border: 2px solid #fff;
+      box-shadow: 0 0 0 1px var(--blue), 0 2px 6px rgba(15,60,201,0.25);
+    }
+    .tl-mid-label {
+      font-size: 9px; font-weight: 700; color: var(--blue);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      white-space: nowrap; margin-top: 3px;
+    }
+    .tl-end {
+      font-size: 10px; font-weight: 700; color: var(--blue);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-align: right;
+    }
+
+    /* ── Track container ── */
+    .tracks {
+      flex: 0.85; display: flex; flex-direction: column;
+      gap: 18px; min-height: 0;
+      position: relative;
+    }
+    .tracks::before {
+      content: 'A + B = C';
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 13px; font-weight: 700; color: var(--blue);
+      opacity: 0.8; pointer-events: none;
+    }
+
+    /* ── Single track ── */
+    .track {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 180px 1fr 220px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    /* Track label */
+    .track-label {
+      padding: 16px 18px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid var(--border);
+    }
+    .track-num {
+      font-size: 10px; font-weight: 700; color: var(--blue);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .track-name {
+      font-size: 13px; font-weight: 700; color: var(--black);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    /* Track body */
+    .track-body {
+      padding: 16px 24px;
+      display: flex; align-items: center;
+      position: relative;
+    }
+
+    /* Chip groups for visual left-to-right flow */
+    .chip-group {
+      display: flex; align-items: center;
+      width: 100%; justify-content: space-between;
+    }
+    .chip-arrow {
+      color: var(--border); font-size: 18px; font-weight: 300;
+      opacity: 0.6;
+    }
+    .chip {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.03em;
+      padding: 8px 14px; border-radius: 100px;
+      white-space: nowrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    /* Track output */
+    .track-output {
+      padding: 16px 18px;
+      display: flex; align-items: center; gap: 12px;
+      border-left: 1px solid var(--border);
+    }
+    .output-badge {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid var(--blue); color: var(--blue);
+      font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(15,60,201,0.08);
+    }
+    .output-text {
+      font-size: 12px; font-weight: 600; color: var(--black);
+      line-height: 1.35;
+    }
+
+    /* ── Stream 1: tint background ── */
+    .track-1 { background: var(--tint); }
+    .track-1 .track-label { background: var(--tint); }
+    .track-1 .track-body { background: var(--tint); }
+    .track-1 .track-output { background: var(--tint); }
+    .track-1 .chip { background: rgba(15,60,201,0.1); color: var(--blue); }
+
+    /* ── Stream 2: slightly deeper tint ── */
+    .track-2 { background: var(--tint2); }
+    .track-2 .track-label { background: var(--tint2); }
+    .track-2 .track-body { background: var(--tint2); }
+    .track-2 .track-output { background: var(--tint2); }
+    .track-2 .chip { background: rgba(15,60,201,0.12); color: var(--blue); }
+
+    /* ── Stream 3: blue hero ── */
+    .track-3 { background: var(--blue); border-color: var(--blue); }
+    .track-3 .track-label { background: var(--deep); border-right-color: rgba(255,255,255,0.1); }
+    .track-3 .track-body { background: var(--blue); }
+    .track-3 .track-output { background: var(--deep); border-left-color: rgba(255,255,255,0.1); }
+    .track-3 .track-num { color: rgba(255,255,255,0.5); }
+    .track-3 .track-name { color: #fff; }
+    .track-3 .chip { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+    .track-3 .chip-arrow { color: rgba(255,255,255,0.2); }
+    .track-3 .output-badge {
+      border-color: rgba(255,255,255,0.6); color: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+    }
+    .track-3 .output-text { color: #fff; }
+
+    /* Shared border colors for tracks 1 and 2 */
+    .track-1 .track-label,
+    .track-2 .track-label { border-right-color: rgba(15,60,201,0.12); }
+    .track-1 .track-output,
+    .track-2 .track-output { border-left-color: rgba(15,60,201,0.12); }
+
+    /* ── Convergence formula ── */
+    .convergence {
+      margin-top: 8px; margin-bottom: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .convergence-text {
+      font-size: 12px; font-weight: 600; color: var(--blue);
+      letter-spacing: 0.03em;
+    }
+    .convergence-arrow {
+      margin: 0 6px; font-weight: 400;
+    }
+
+    /* ── Value line ── */
+    .value-line {
+      margin-top: 12px;
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+    }
+    .value-rule { flex: 1; height: 1px; background: var(--border); }
+    .value-text {
+      font-size: 11px; font-weight: 700; color: var(--black);
+      letter-spacing: 0.04em; white-space: nowrap;
+    }
+
+    /* Footer */
+    .footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 10px; margin-top: auto;
+      font-size: 10px; color: var(--grey-m); letter-spacing: 0.04em;
+    }
+    .footer span { font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<div class="slide">
+
+  <div class="eyebrow">Engineering-led discovery</div>
+  <div class="title">Three Streams. Two Weeks.</div>
+  <div class="subtitle">Three tracks run in parallel from day one. By end of week 2, every critical question has an answer.</div>
+
+  <!-- Timeline rule -->
+  <div class="timeline-rule">
+    <div class="tl-start">Day 1</div>
+    <div class="tl-bar">
+      <div class="tl-line"></div>
+      <div class="tl-mid">
+        <div class="tl-mid-dot"></div>
+        <div class="tl-mid-label">End of Week 1</div>
+      </div>
+    </div>
+    <div class="tl-end">End of Week 2</div>
+  </div>
+
+  <!-- Tracks -->
+  <div class="tracks">
+
+    <!-- Stream 1: Journey Analysis -->
+    <div class="track track-1">
+      <div class="track-label">
+        <div class="track-num">Stream 1</div>
+        <div class="track-name">Agentic Journey Analysis</div>
+      </div>
+      <div class="track-body">
+        <div class="chip-group">
+          <span class="chip">Privacy & data access for LLM</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">RX Skills source archaeology</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Real-time vs deferred signals</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Score agent opportunity</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Rank by value + feasibility</span>
+        </div>
+      </div>
+      <div class="track-output">
+        <div class="output-badge">A</div>
+        <div class="output-text">Which experiences should we create?</div>
+      </div>
+    </div>
+
+    <!-- Stream 2: Prototype -->
+    <div class="track track-3">
+      <div class="track-label">
+        <div class="track-num">Stream 2</div>
+        <div class="track-name">Working Prototype</div>
+      </div>
+      <div class="track-body">
+        <div class="chip-group">
+          <span class="chip">Real data</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Language</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Memory</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">API integration</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Latency</span>
+        </div>
+      </div>
+      <div class="track-output">
+        <div class="output-badge">B</div>
+        <div class="output-text">Can we create the experience we want?</div>
+      </div>
+    </div>
+
+    <!-- Stream 3: Architecture + Voice -->
+    <div class="track track-2">
+      <div class="track-label">
+        <div class="track-num">Stream 3</div>
+        <div class="track-name">Architecture & Voice</div>
+      </div>
+      <div class="track-body">
+        <div class="chip-group">
+          <span class="chip">Source data audit</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">API + integration mapping</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Gap analysis</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Voice provider selection</span>
+          <span class="chip-arrow">›</span>
+          <span class="chip">Target architecture</span>
+        </div>
+      </div>
+      <div class="track-output">
+        <div class="output-badge">C</div>
+        <div class="output-text">What does the platform need to look like?</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Value line -->
+  <div class="value-line">
+    <div class="value-rule"></div>
+    <div class="value-text">Three streams. Two weeks. Every critical question answered.</div>
+    <div class="value-rule"></div>
+  </div>
+
+  <div class="footer">
+    <div><span>Reliance</span> x <span>Accenture</span> Strategic Partnership</div>
+    <div>Copyright Accenture 2026. All rights reserved.</div>
+  </div>
+
+</div>
+
+</body>
+</html>
