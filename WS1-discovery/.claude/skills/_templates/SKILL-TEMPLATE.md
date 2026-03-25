@@ -54,6 +54,18 @@ SKILL.md is the contract for how the agent runs the skill. Authors **MUST** foll
 3. **Usage Context Sections**
    - `## Purpose`, `## When to Use`, and `## Artifacts Produced` (**SHOULD**).
    - Artifacts section **MUST** state both working and review locations with explicit filenames (e.g., `reports/<skill>/outcome-<skill>-<date>.md`).
+
+3.5. **Jio CX Behavior (Required for all Jio CX hypothesis skills)**
+   - **MUST** include this section if the skill is scaffolded by go_hunt in Jio CX engagement.
+   - **PURPOSE:** Define what this hypothesis means for Jio Buddy BEFORE writing queries.
+   - **TABLE** with four required fields:
+     - `Signal` — What measurable event are we detecting? (e.g., "SINR drops >15dB in 72h window")
+     - `Lead time` — How far ahead before customer pain? (e.g., "72h before MNP port-out")
+     - `Type` — LIVE (trigger now) or DEFERRED (store for later)?
+     - `Jio Buddy behavior` — What does the agent say or do? (e.g., "We noticed your signal dropped. Here's ₹100 credit.")
+   - **IF YOU CANNOT FILL THIS TABLE, THIS HYPOTHESIS DOES NOT BELONG IN JIO CX PIPELINE.** Return to go_hunt and deprioritize or re-frame.
+   - **Reference:** CONTEXT.md (../CONTEXT.md) for signal taxonomy and what "good" looks like.
+
 4. **Key Metrics & Thresholds**
    - Present tables describing codes/metrics, thresholds, and notes.
    - **MUST** include severity or threshold logic that maps directly to analysis outputs.

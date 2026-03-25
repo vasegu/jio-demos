@@ -47,6 +47,8 @@ Go Hunt does not produce final analytical reports — it produces **skills** tha
 ### Phase 0 — Intake
 **Goal:** Establish exploration scope, capture any new hypotheses, and check what's already known.
 
+**Situation context:** If a **CONTEXT.md** file exists in the engagement directory (e.g., `../CONTEXT.md`), read it before intake. This tells you how to interpret discoveries in the context of this specific engagement — it won't contaminate exploration, but will shape how findings are articulated and whether they pass governance.
+
 Lead with a plain-language intro, then gather scope with structured steps:
 
 1. **Intro:** "I can explore the database for patterns that existing skills don't cover — testing uncovered hypotheses, profiling unused columns, and looking for cross-skill correlations. This produces a discovery report with ranked findings and, if approved, scaffolds new skills."
@@ -134,6 +136,8 @@ Lead with a plain-language intro, then gather scope with structured steps:
 
 ### Phase 4 — Governance Gate
 **Goal:** User decides what to act on.
+
+**Context alignment check:** If a CONTEXT.md file exists in the engagement directory, confirm that each finding being promoted to scaffolding or action answers the key questions defined there. If the context defines a specific structure for findings (e.g., Signal → Lead Time → Type → Behavior), verify that every promoted finding is articulated using that frame. Findings that don't meet context criteria should be flagged for reworking, deprioritization, or exclusion.
 
 **Checkpoint — Present findings with structured triage:**
 

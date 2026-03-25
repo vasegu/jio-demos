@@ -74,6 +74,22 @@ Without Basecamp, Go Hunt explores blind. With it, Go Hunt explores informed.
 
 ## SOP Phases
 
+### Phase 0A — Situation Context (Optional)
+
+Before beginning the Brain Dump, check if there's a **CONTEXT.md** file in the engagement directory (e.g., `../CONTEXT.md` or `./CONTEXT.md`).
+
+If one exists, read it first. This tells you how to interpret findings in the context of this specific engagement without contaminating data discovery. The context file typically defines:
+- What you're building or analyzing
+- The interpretation frame for findings
+- What makes a "good finding" for this engagement
+- Any taxonomies, checklists, or domain-specific vocabulary
+
+After reading CONTEXT.md, proceed with Phase 0 (Brain Dump) below.
+
+At the end of §6 (Industry Research), add a section mapping discovered data sources to opportunities or signal types defined in the context file — this ensures research is grounded in engagement-specific definitions.
+
+---
+
 ### Phase 0 — Brain Dump
 
 **Goal:** Extract everything the analyst knows (or thinks they know) before touching the data.

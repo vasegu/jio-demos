@@ -2,6 +2,21 @@
 
 Skills pipeline investigation. Findings append to root FINDINGS.md.
 
+## Before Running Any Skill
+
+**Read `CONTEXT.md` first.** This is the situation modifier — it tells skills HOW to interpret what they find, without telling them WHAT to find.
+
+CONTEXT.md defines:
+- What we're building (Jio Buddy + architecture reference)
+- The interpretation frame (signals → behaviors, not root causes)
+- Signal taxonomy (network, behavioral, transactional, temporal)
+- LIVE vs. DEFERRED signal types
+- What a "good finding" looks like for Jio CX
+
+Skills from the central framework + CONTEXT.md lens = Jio CX-specific discovery.
+
+---
+
 ## How It Works
 
 1. Run a skill: `/basecamp` → `/go_hunt` → specific hypothesis skill
