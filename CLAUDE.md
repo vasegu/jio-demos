@@ -23,12 +23,18 @@ bash ~/.claude/skills/linear/scripts/linear.sh project "JIO CX"   # sprint board
 4. `mkdir mvp/app/experiences/H4-intervention-timing/`
 5. Write README.md + discovery-link.md in that folder
 
-## Directory Guide
-| discovery/              | Skills run here. Reports land in .claude/reports/. |
-| mvp/app/experiences/    | One folder per validated hypothesis. |
-| mvp/docs/               | Reference: ARCHITECTURE, HYPOTHESES, GOOGLE-STACK. |
-| demo/                   | Frozen. Reuse UX patterns only. |
-| presentations/          | Edit and ship fast for stakeholders. |
+## Workstreams
+| WS0-demo/              | Static workshop reference. Frozen. Reuse UX patterns only. |
+| WS1-discovery/         | Skills run here. Reports land in .claude/reports/. FINDINGS.md feeds here. |
+| WS2-mvp/app/           | Build experiences from validated findings. One folder per hypothesis. |
+| WS2-mvp/docs/          | Reference: ARCHITECTURE, HYPOTHESES, GOOGLE-STACK. |
+| future/                | Phase 4 & beyond. Operational playbooks, evolution. |
+
+## Assets
+| assets/presentations/   | Edit and ship fast for stakeholders. |
+| assets/brand-assets/    | Logos, fonts. |
+| assets/brand-references/ | Design tokens (jio-theme.css, JS tokens). |
+| assets/template/        | HTML starter for presentations. |
 
 ## Design
 JioType · #0F3CC9 · 12px radius · outlined SVG icons · no emojis

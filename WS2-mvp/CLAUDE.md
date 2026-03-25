@@ -14,7 +14,7 @@ Build experiences from validated findings. The experiences/ folder is where prog
 ## Structure
 
 ```
-mvp/
+WS2-mvp/
 ├── CLAUDE.md              (you are here)
 ├── app/
 │   ├── experiences/       (one folder per validated hypothesis behavior)
@@ -46,6 +46,6 @@ mvp/
 
 ## Check
 
-Before every change to architecture or stack: read `mvp/docs/ARCHITECTURE.md` and `mvp/docs/GOOGLE-STACK.md`.
+Before every change to architecture or stack: read `docs/ARCHITECTURE.md` and `docs/GOOGLE-STACK.md`.
 
-FINDINGS.md is the single source of truth for what's been validated and why.
+Root FINDINGS.md is the single source of truth for what's been validated and why.
