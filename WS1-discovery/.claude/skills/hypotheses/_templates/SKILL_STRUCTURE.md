@@ -54,6 +54,47 @@ SKILL.md is the contract for how the agent runs the skill. Authors **MUST** foll
 3. **Usage Context Sections**
    - `## Purpose`, `## When to Use`, and `## Artifacts Produced` (**SHOULD**).
    - Artifacts section **MUST** state both working and review locations with explicit filenames (e.g., `reports/<skill>/outcome-<skill>-<date>.md`).
+
+3.5. **Experience Design (Required for all Jio CX hypothesis skills)**
+   - **MUST** include this section if the skill is scaffolded by go_hunt in Jio CX engagement.
+   - **PURPOSE:** Define the complete experience BEFORE writing any queries. This section gates whether the hypothesis belongs in the pipeline.
+   - **MUST complete all four sub-sections:** Signal Definition, CX Impact, Intervention Design, and Intervention Guardrails.
+
+   **Signal Definition**
+   - Define the trigger with a table containing:
+     - `Signal` — Specific measurable event (e.g., "SINR drops >15dB within 72h")
+     - `Lead time` — Hours/days before customer pain peaks (e.g., "72h before MNP port-out")
+     - `Type` — LIVE (trigger outreach now) or DEFERRED (store in memory)
+     - `Data source` — Table or stream where signal lives (e.g., network_events, billing_transactions)
+     - `Threshold` — Numeric threshold that triggers this (derived from data, not guessed)
+     - `Coverage` — Estimated monthly customer reach (e.g., "~4.5M customers/month")
+
+   **CX Impact**
+   - Quantify what this experience saves, prevents, or improves. Table with:
+     - `What we save` → `Specifics` → `Target metric` (e.g., "prevent port-out → reduce MNP by X%")
+     - `What we prevent` → `Specifics` → `Target metric` (e.g., "avoid IVR contact → deflect Y% of calls")
+     - `What we improve` → `Specifics` → `Target metric` (e.g., "NPS in cohort → +Z NPS points in 90d")
+
+   **Intervention Design**
+   - Describe exactly how Jio Buddy handles this signal. Table with:
+     - `Channel` — LIVE: voice push / DEFERRED: recalled on next contact
+     - `Timing` — When it fires (e.g., "within 2h of signal, or stored for 72h")
+     - `Jio Buddy script` — **Exact voice script** using [VARIABLE] placeholders (e.g., "Hi [customer_name], we noticed you were offline for [duration]. Sorry about that — here's [credit_amount] to help.")
+     - `Personalization variables` — List of variables available (e.g., customer_name, outage_duration, credit_amount)
+     - `Offer / action` — What the customer gets or can do (e.g., "₹50 credit, priority callback, plan explanation")
+     - `Guardrails` — Who NOT to target in this intervention (will elaborate below)
+
+   **Intervention Guardrails**
+   - Checklist of constraints. Do NOT intervene if:
+     - [ ] Customer already received this intervention this week
+     - [ ] Active complaint ticket is open
+     - [ ] Customer in churn-offer cooldown period
+     - [ ] [Add engagement-specific constraints]
+
+   > **Gate:** If you cannot complete ALL FOUR sub-sections (Signal, Impact, Design, Guardrails), this hypothesis does not belong in the Jio CX pipeline. Return to go_hunt and deprioritize or re-frame.
+
+   **Reference:** CONTEXT.md (../CONTEXT.md) for signal taxonomy, LIVE/DEFERRED classification, and what "good finding" looks like.
+
 4. **Key Metrics & Thresholds**
    - Present tables describing codes/metrics, thresholds, and notes.
    - **MUST** include severity or threshold logic that maps directly to analysis outputs.

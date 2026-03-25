@@ -165,14 +165,16 @@ Lead with a plain-language intro, then gather scope with structured steps:
   templates/
     README.md       — naming conventions
     report-template.md — outcome document template
+    experience-brief.md   — (Jio CX hypothesis skills) pre-filled from Phase 3 findings, completed during skill execution
     erd-template.mmd   — if relevant
 ```
 
 - Update `.claude/skills/hypotheses/README.md` to add the new skill to the directory tree.
 
 **Requirements:**
-- SKILL.md **MUST** follow the structure defined in SKILL_STRUCTURE Section 4.
+- SKILL.md **MUST** follow the structure defined in SKILL_STRUCTURE Section 4, including the full **Experience Design section (Section 3.5)** for Jio CX hypothesis skills. This section must be completed (Signal Definition, CX Impact, Intervention Design, Intervention Guardrails) before scaffolding passes governance.
 - SKILL.md **MUST** include a Hypothesis-KPI Mapping table (Section 4.5) seeded from the candidate KPIs defined in Phase 3.
+- templates/experience-brief.md **MUST** be pre-filled with findings from Phase 3 synthesis and completed during skill execution. This is the primary deliverable for Jio CX skills.
 - queries.sql **MUST** follow the conventions in SKILL_STRUCTURE Section 5.
 - queries.sql **MUST** use `$SCHEMA.table_name` for all table references (see SKILL_STRUCTURE Section 5.1.1). Read the schema name from `.env.schema` — never hardcode it.
 - All queries **MUST** be read-only (`SELECT` / CTE only).

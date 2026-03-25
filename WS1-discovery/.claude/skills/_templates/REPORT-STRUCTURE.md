@@ -11,6 +11,7 @@ This file is consumed during Phase 5 (Report Generation) of `ANALYSIS_WORKFLOW.m
 ### templates/ Folder
 - **MUST** live at `.claude/skills/<skill>/templates/`.
 - **MUST** contain `report-template.md` defining the outcome document structure.
+- **MUST** contain `experience-brief.md` (for Jio CX hypothesis skills) — the shareable, actionable brief for the team. This is pre-filled during go_hunt Phase 3 synthesis and completed during skill execution. It is the *primary* deliverable alongside the analytical report.
 - **SHOULD** contain `erd-template.mmd` for entity relationship diagrams where relevant.
 - **AVOID** storing generated reports here — templates only.
 
@@ -112,6 +113,7 @@ Every report template **MUST** include a **Sources** section at the bottom:
   - Plans: `plan-<skill>-YYYY-MM-DD.md`
   - Outcomes: `outcome-<skill>-YYYY-MM-DD.md`
   - Discovery: `discovery-go-hunt-YYYY-MM-DD.md`
+  - Experience Brief (Jio CX hypothesis skills): `experience-brief-<slug>-YYYY-MM-DD.md` — **This is the PRIMARY artifact** for Jio CX skills. It is shareable with the Jio team and feeds directly into WS2-mvp. The analytical outcome report is the supporting evidence.
 - **AVOID** storing non-Markdown binaries; chart specs and diagrams stay text-based for diffability.
 
 ---
