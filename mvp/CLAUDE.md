@@ -1,78 +1,51 @@
-# Jio CX - Engineering Discovery Sprint
+# MVP Workstream
 
-## Context
+Build experiences from validated findings. The experiences/ folder is where progress lives.
 
-2-week engineering-led discovery for Jio CX use case. Three parallel streams converging on a working prototype.
+## The Build Loop
 
-**Core Experience:**
-Signal drops → store in human memory → customer comes back online → voice push: "sorry, here's a discount"
+1. Check FINDINGS.md (root) — what's been discovered?
+2. If finding passes governance → it's in FINDINGS.md with a ticket number and "Experience: pending scaffold"
+3. Create folder in `app/experiences/` (named after hypothesis, e.g., H1-proactive-credit)
+4. Write `README.md` (what it does, why, success metric) + `discovery-link.md` (link back to finding)
+5. Build component
+6. Test in mvp/docs flow before shadow release
 
-**Platform:** Google ADK for voice agents
-
-## Directory Structure
+## Structure
 
 ```
 mvp/
-├── .claude/          ← Claude Code skills (basecamp, go_hunt, hypotheses, log_session)
-├── docs/             ← Investigation layer (ARCHITECTURE, GOOGLE-STACK, SPRINT-PLAN, etc.)
-├── discovery/        ← Stream outputs
-│   ├── stream-1-journeys.md    ← Which signals trigger which interventions
-│   ├── stream-2-prototype.md   ← ADK agent build log
-│   └── stream-3-architecture.md ← Voice, memory, swappable layers
-├── mvp/              ← Working prototype code
-│   ├── agent/        ← Google ADK voice agent
-│   ├── memory/       ← Human memory store (signals about the person)
-│   └── signals/      ← Signal detection layer
-└── CLAUDE.md         ← This file
+├── CLAUDE.md              (you are here)
+├── app/
+│   ├── experiences/       (one folder per validated hypothesis behavior)
+│   │   ├── H1-proactive-credit/
+│   │   │   ├── README.md  (experience brief: what, why, success metric)
+│   │   │   ├── discovery-link.md  (one line: "H1 | VAS-12 | 2026-03-24 | HIGH")
+│   │   │   └── component.jsx (and supporting code)
+│   │   └── H2-silent-outreach/
+│   │       ├── README.md
+│   │       ├── discovery-link.md
+│   │       └── ...
+│   └── src/               (React app, styles, assets)
+│
+└── docs/                  (Reference docs — don't move)
+    ├── ARCHITECTURE.md    (Full stack: Signal → Memory → Agent → Voice)
+    ├── HYPOTHESES.md      (All 8 hypotheses + data requirements)
+    ├── GOOGLE-STACK.md    (ADK, Vertex AI, Flink CEP, signal pipeline)
+    └── (other reference docs)
 ```
 
-## The 3 Streams (2 weeks)
+## Workflow
 
-### Stream 1: Agentic Journey Analysis
-- Which signals indicate unhappy customer?
-- What interventions make sense?
-- Privacy & data access requirements
-- Score and rank by value + feasibility
+| Stage | Status | Examples |
+|-------|--------|----------|
+| Discovery → Finding | FINDINGS.md with ✓ | H1, H2, H4 |
+| Finding → Ticket | STATUS.md shows ticket | VAS-12, VAS-13, VAS-14 |
+| Ticket → Experience | folder exists | app/experiences/H1-proactive-credit/ |
+| Experience → Shadow | STATUS.md Shadow column | Ready after component built |
 
-### Stream 2: Working Prototype
-- Google ADK voice agent
-- Real data connection (pending Databricks access)
-- Memory layer for customer context
-- API integration for push notifications
-- Latency requirements
+## Check
 
-### Stream 3: Architecture & Voice
-- Source data audit
-- Voice provider selection (ADK native vs alternatives)
-- Target architecture for swappable components (model, voice, local GPU deployment)
-- Gap analysis
+Before every change to architecture or stack: read `mvp/docs/ARCHITECTURE.md` and `mvp/docs/GOOGLE-STACK.md`.
 
-## Key Architecture Decisions
-
-1. **Voice:** Google ADK (primary) - need to evaluate against alternatives
-2. **Memory:** Human memory pattern - accumulated context, not just sessions
-3. **Swappability:** Design for model/voice provider swap, future local GPU deployment
-4. **Reuse:** Phone UI from existing jio-demos app
-
-## References
-
-- Parent demo: `../app/` (workshop demo)
-- Skills: `.claude/skills/` (basecamp, go_hunt, hypotheses, log_session)
-- Google stack research: `docs/GOOGLE-STACK.md`
-- Sprint plan: `docs/SPRINT-PLAN.md`
-- Architecture: `docs/ARCHITECTURE.md`
-
-## Timeline
-
-- Week 1: All streams in parallel, daily syncs
-- End Week 1: Stream 1 delivers ranked opportunities, Stream 2 has voice agent scaffold, Stream 3 has target architecture
-- Week 2: Converge on single prototype, integrate streams
-- End Week 2: Working demo of core experience (signal → memory → voice push)
-
-## Success Criteria
-
-By end of sprint:
-- [ ] Voice agent responds to "I'm back online" with contextual apology + offer
-- [ ] Memory layer stores and retrieves customer signal history
-- [ ] Architecture supports swapping voice/model provider
-- [ ] Clear path to production (data access, latency, privacy)
+FINDINGS.md is the single source of truth for what's been validated and why.

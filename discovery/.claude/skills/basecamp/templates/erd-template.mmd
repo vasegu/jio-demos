@@ -1,0 +1,20 @@
+%% Basecamp ERD Template
+%% Replace with actual schema relationships discovered in Phase 1
+%% Use erDiagram for entity relationships
+
+erDiagram
+    TABLE_A {
+        id int PK
+        name varchar
+        created_at timestamp
+    }
+    TABLE_B {
+        id int PK
+        table_a_id int FK
+        value numeric
+    }
+    TABLE_A ||--o{ TABLE_B : "has many"
+
+%% TEMPLATE: Phase 1 will replace this with the actual ERD
+%% discovered from information_schema queries.
+%% Include both explicit FKs and inferred joins.
