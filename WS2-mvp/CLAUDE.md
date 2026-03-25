@@ -1,5 +1,15 @@
 # MVP Workstream
 
+## Where This Fits in ADLC
+
+This workstream is **Phase 2: Real-World Validation**.
+
+- Hypotheses from WS1-discovery findings are built as experiences here
+- Each experience folder (H1-proactive-credit, H2-silent-outreach, etc.) is a validated behavior ready for shadow testing and hardening
+- See `../CLAUDE.md` for "The Loop" overview
+
+---
+
 Build experiences from validated findings. The experiences/ folder is where progress lives.
 
 ## The Build Loop

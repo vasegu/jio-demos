@@ -1,11 +1,26 @@
 # JIO CX
 
+## Quick Start (First Time)
+
+1. **Setup:** Copy `.env.local.example` to `.env.local` and fill in your Linear API key
+2. **Understand state:** Read `STATUS.md` (current hypotheses) then `FINDINGS.md` (what passed)
+3. **Pick your entry point:**
+   - **Explore new data?** Run `/basecamp` in WS1-discovery
+   - **Test hypotheses?** Run `/go_hunt` in WS1-discovery
+   - **Run specific hypothesis?** Run `/H1`, `/H2`, `/H4` etc. in WS1-discovery
+   - **Build an experience?** Go to WS2-mvp/app/experiences/
+4. **Before running any skill:** Read `WS1-discovery/CONTEXT.md` (signals frame, governance gate)
+5. **After each run:** Append findings to root `FINDINGS.md`, create Linear ticket if passed
+
+---
+
 ## The Loop
 Question → skill run → finding → FINDINGS.md → Linear ticket → experience → next question
 
-## Read First
+## Read First (Every Session)
 **STATUS.md** — what's the current state (8 hypotheses, one table, 10 seconds)
 **FINDINGS.md** — what's been discovered (newest first, Claude's session brief)
+**WS1-discovery/CONTEXT.md** — the interpretation frame (signals, not root causes)
 
 ## Commands
 ```bash

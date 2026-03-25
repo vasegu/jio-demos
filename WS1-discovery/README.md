@@ -1,5 +1,16 @@
 # Discovery Workstream
 
+## Where This Fits in ADLC
+
+This workstream is **Phase 1: Technical Feasibility** — the agentic experimentation track.
+
+- Skills here (basecamp, go_hunt) discover and test hypotheses
+- Findings feed into `FINDINGS.md` (root) and drive `WS2-mvp` builds
+- See `../CLAUDE.md` for "The Loop" overview
+- See `CONTEXT.md` below for how to interpret findings
+
+---
+
 Skills pipeline investigation. Findings append to root FINDINGS.md.
 
 ## Before Running Any Skill

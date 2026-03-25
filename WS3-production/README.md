@@ -1,4 +1,15 @@
-# WS3 — Production & Operations (Phase 4)
+# WS3 — Production & Operations
+
+## Where This Fits in ADLC
+
+This workstream covers **Phase 3: Production Hardening** and **Phase 4: Agentic Operations**.
+
+- **Phase 3:** Harden experiences proven in WS2-mvp (performance, security, scale)
+- **Phase 4:** Run and evolve the live system (monitoring, behavior drift, value tracking)
+
+See `../CLAUDE.md` for "The Loop" overview and how phases connect.
+
+---
 
 Live system operations and evolution.
 
