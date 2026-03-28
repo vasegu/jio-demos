@@ -1,5 +1,8 @@
 # FINDINGS
 
+> ⚠️ **FORMAT EXAMPLES ONLY** — The entries below illustrate how a validated finding should be written.
+> They are not real validated findings. Replace them with actual discoveries from WS1-discovery skill runs.
+
 ## H4 — Complaint Fingerprint Signal  |  2026-03-27  |  HIGH confidence
 Network QoS drops in specific pattern 24-48h before customer contacts IVR.
 Evidence: 2.1M events, 81% precision. Covers 23% of all contact volume.

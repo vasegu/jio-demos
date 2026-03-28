@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Roles — Jio CX Discovery</title>
+
+  <style>
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Light.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Medium.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Bold.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --jio-blue: #0F3CC9;
+      --jio-deep-blue: #0a2885;
+      --jio-red: #DA2441;
+      --jio-green: #00C853;
+      --jio-gold: #EFA73D;
+      --jio-purple: #7B1FA2;
+      --jio-black: #141414;
+      --jio-grey: rgba(0,0,0,0.65);
+      --jio-grey-muted: rgba(0,0,0,0.35);
+      --jio-border: #E0E0E0;
+      --jio-light-tint: #E7EBF8;
+      --jio-off-white: #FAFAFA;
+      --jio-white: #FFFFFF;
+      --jio-font: 'JioType', 'Nunito', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--jio-font);
+      color: var(--jio-black);
+      background: var(--jio-white);
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Slide container — 16:9 aspect ratio */
+    .slide {
+      width: 1440px;
+      height: 810px;
+      margin: 0 auto;
+      padding: 40px 56px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Header area */
+    .slide-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--jio-grey);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .slide-title {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--jio-black);
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+    .slide-subtitle {
+      font-size: 16px;
+      color: var(--jio-grey);
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    /* Three-column role grid */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .role-card {
+      background: var(--jio-white);
+      border: 1px solid var(--jio-border);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: border-color 0.2s ease;
+    }
+
+    .role-card:hover {
+      border-color: var(--jio-blue);
+    }
+
+    .role-card.leadership {
+      border-top: 3px solid var(--jio-purple);
+    }
+    .role-card.engineering {
+      border-top: 3px solid var(--jio-blue);
+    }
+    .role-card.product {
+      border-top: 3px solid var(--jio-green);
+    }
+    .role-card.design {
+      border-top: 3px solid var(--jio-gold);
+    }
+    .role-card.ops {
+      border-top: 3px solid var(--jio-red);
+    }
+    .role-card.reliance {
+      border-top: 3px solid var(--jio-grey);
+    }
+
+    .role-tag {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--jio-grey-muted);
+    }
+
+    .role-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--jio-black);
+    }
+
+    .role-person {
+      font-size: 11px;
+      color: var(--jio-grey);
+      font-weight: 500;
+    }
+
+    .role-desc {
+      font-size: 11px;
+      color: var(--jio-grey);
+      line-height: 1.5;
+      flex: 1;
+      margin-top: 4px;
+    }
+
+    .role-entry {
+      font-size: 10px;
+      background: rgba(15, 60, 201, 0.06);
+      color: var(--jio-blue);
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--jio-border);
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      color: var(--jio-grey-muted);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .dot-leadership { background: var(--jio-purple); }
+    .dot-engineering { background: var(--jio-blue); }
+    .dot-product { background: var(--jio-green); }
+    .dot-design { background: var(--jio-gold); }
+    .dot-ops { background: var(--jio-red); }
+    .dot-reliance { background: var(--jio-grey); }
+
+    /* Footer */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      font-size: 9px;
+      color: var(--jio-grey-muted);
+    }
+    .slide-footer span {
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slide">
+
+  <!-- Header -->
+  <div class="slide-eyebrow">Organization & accountability</div>
+  <div class="slide-title">Your Team</div>
+  <div class="slide-subtitle">Who does what in the discovery process</div>
+
+  <!-- Role Grid -->
+  <div class="role-grid">
+
+    <!-- Leadership -->
+    <div class="role-card leadership">
+      <div class="role-tag">Leadership</div>
+      <div class="role-name">Experience Lead</div>
+      <div class="role-person">(TBD)</div>
+      <div class="role-desc">Set vision, prioritize signals, approve signal→behavior mappings. Design Review chair.</div>
+      <div class="role-entry">Entry: Design reviews</div>
+    </div>
+
+    <!-- Product -->
+    <div class="role-card product">
+      <div class="role-tag">Product</div>
+      <div class="role-name">Product Manager</div>
+      <div class="role-person">Mark.Farbrace</div>
+      <div class="role-desc">Translate signals into PRDs. Own H1–H3 experience requirements and launch roadmap.</div>
+      <div class="role-entry">Entry: /go_hunt output</div>
+    </div>
+
+    <!-- Delivery -->
+    <div class="role-card leadership">
+      <div class="role-tag">Leadership / Delivery</div>
+      <div class="role-name">Value Orchestrator & Scrum Lead</div>
+      <div class="role-person">David.g.miller</div>
+      <div class="role-desc">Sprint planning, stakeholder sync, blocker resolution. Unblock data access.</div>
+      <div class="role-entry">Entry: Sprint ceremonies</div>
+    </div>
+
+    <!-- Architecture -->
+    <div class="role-card engineering">
+      <div class="role-tag">Engineering / Architecture</div>
+      <div class="role-name">Domain Ontology Architect</div>
+      <div class="role-person">Mark.Welsh</div>
+      <div class="role-desc">Map signals to Jio data model. Define signal schema. Coordinate architecture.</div>
+      <div class="role-entry">Entry: Signal design</div>
+    </div>
+
+    <!-- Squad Lead -->
+    <div class="role-card engineering">
+      <div class="role-tag">Engineering</div>
+      <div class="role-name">Squad Lead</div>
+      <div class="role-person">Pulak.a.agrawal</div>
+      <div class="role-desc">Lead discovery skill runs. Review finding quality. Design H3–H8 hypotheses.</div>
+      <div class="role-entry">Entry: /go_hunt</div>
+    </div>
+
+    <!-- ADK Integration -->
+    <div class="role-card engineering">
+      <div class="role-tag">Engineering / AI</div>
+      <div class="role-name">Agentic Integration Architect</div>
+      <div class="role-person">(India)</div>
+      <div class="role-desc">Design ADK integration. Voice/NLU pipeline. Guardrail enforcement logic.</div>
+      <div class="role-entry">Entry: Experience brief</div>
+    </div>
+
+    <!-- AI Science -->
+    <div class="role-card engineering">
+      <div class="role-tag">Science</div>
+      <div class="role-name">Applied AI Scientist</div>
+      <div class="role-person">Christopher.malloy</div>
+      <div class="role-desc">Validate statistical rigor. Flag p-hacking. QA precision/recall claims.</div>
+      <div class="role-entry">Entry: Finding review</div>
+    </div>
+
+    <!-- Design -->
+    <div class="role-card design">
+      <div class="role-tag">Design / Ops</div>
+      <div class="role-name">Conversational & Ops Designer</div>
+      <div class="role-person">Megan.Charles</div>
+      <div class="role-desc">Script Jio Buddy voice. Design guardrails. Map operational constraints.</div>
+      <div class="role-entry">Entry: Experience brief</div>
+    </div>
+
+    <!-- FD AI Engineer 1 -->
+    <div class="role-card engineering">
+      <div class="role-tag">Engineering</div>
+      <div class="role-name">Forward Deployed AI Engineer 1</div>
+      <div class="role-person">(India)</div>
+      <div class="role-desc">Run discovery skills. Build analysis notebooks. Execute hypothesis skill runs.</div>
+      <div class="role-entry">Entry: /basecamp</div>
+    </div>
+
+    <!-- FD AI Engineer 2 -->
+    <div class="role-card engineering">
+      <div class="role-tag">Engineering</div>
+      <div class="role-name">Forward Deployed AI Engineer 2</div>
+      <div class="role-person">v.eguren</div>
+      <div class="role-desc">Lead discovery. Hypothesis validation. Experience scaffolding. Findings author.</div>
+      <div class="role-entry">Entry: Signal discovery</div>
+    </div>
+
+    <!-- Trust & AI -->
+    <div class="role-card ops">
+      <div class="role-tag">Security / Ops</div>
+      <div class="role-name">Trust & AI Engineer</div>
+      <div class="role-person">Palash.Surana</div>
+      <div class="role-desc">Privacy audit. Compliance. Enforce contact frequency policy and opt-outs.</div>
+      <div class="role-entry">Entry: Privacy review</div>
+    </div>
+
+    <!-- Reliance SME -->
+    <div class="role-card reliance">
+      <div class="role-tag">Reliance / Domain</div>
+      <div class="role-name">Business SME</div>
+      <div class="role-person">&lt;Reliance&gt;</div>
+      <div class="role-desc">Validate signals against real behavior. Flag blind spots. Provide context.</div>
+      <div class="role-entry">Entry: Finding validation</div>
+    </div>
+
+    <!-- Infra Engineer -->
+    <div class="role-card ops">
+      <div class="role-tag">Ops / Infrastructure</div>
+      <div class="role-name">Platform Infra Engineer</div>
+      <div class="role-person">&lt;Reliance&gt;</div>
+      <div class="role-desc">Databricks/Flink access. Signal pipeline infrastructure. Unblock data sources.</div>
+      <div class="role-entry">Entry: H5 unblock</div>
+    </div>
+
+    <!-- SRE -->
+    <div class="role-card ops">
+      <div class="role-tag">Ops / Reliability</div>
+      <div class="role-name">Site Reliability Engineer</div>
+      <div class="role-person">&lt;Reliance&gt;</div>
+      <div class="role-desc">Design production safety guardrails. Monitoring, alerting, rollback procedures.</div>
+      <div class="role-entry">Entry: Phase 3</div>
+    </div>
+
+  </div><!-- /role-grid -->
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot dot-leadership"></div>Leadership</div>
+    <div class="legend-item"><div class="legend-dot dot-engineering"></div>Engineering</div>
+    <div class="legend-item"><div class="legend-dot dot-product"></div>Product</div>
+    <div class="legend-item"><div class="legend-dot dot-design"></div>Design</div>
+    <div class="legend-item"><div class="legend-dot dot-ops"></div>Ops / Security</div>
+    <div class="legend-item"><div class="legend-dot dot-reliance"></div>Reliance-led</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <div><span>Reliance Jio</span> × <span>Accenture</span> Strategic Partnership</div>
+    <div><span>Copyright Accenture 2026</span></div>
+  </div>
+
+</div>
+
+</body>
+</html>

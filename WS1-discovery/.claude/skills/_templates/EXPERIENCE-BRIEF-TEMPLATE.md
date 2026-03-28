@@ -23,8 +23,10 @@
 | **Trigger** | [Specific data event and threshold, e.g. "SINR drops >15dB within 72h"] |
 | **Source** | [Data table / stream, e.g. "network_events"] |
 | **Lead time** | [X hours/days before customer pain peaks, e.g. "72h before MNP port-out"] |
+| **Intent** | PREEMPT / CROSS-SELL / IMPROVE / RESELL / PREVENT-CONTACT |
 | **Type** | LIVE / DEFERRED |
 | **Coverage** | ~[N]M customers/month at risk |
+| **TTL** | [How long this signal remains valid, e.g. "48h", "until stated event passes"] |
 
 ---
 
@@ -38,12 +40,24 @@
 
 ## CX Impact
 
+Choose metrics that match your signal's Intent:
+
+| Intent | Primary Metric | Secondary Metric | Guard Metric |
+|--------|---------------|-----------------|--------------|
+| **PREEMPT** | Churn reduction (%) | NPS lift | Offer cost per customer |
+| **CROSS-SELL** | Offer conversion rate (%) | Revenue generated (₹/month) | Customer opt-out rate |
+| **IMPROVE** | CSAT lift | Feature adoption rate | Engagement delta |
+| **RESELL** | Reactivation rate (%) | LTV change | Campaign cost ratio |
+| **PREVENT-CONTACT** | IVR deflection rate (%) | Handle time reduction (minutes) | False-positive contact rate |
+| **CELEBRATE** | Loyalty score uplift | Repeat engagement rate | Cost per gesture |
+
+**Targets for this experience:**
+
 | Metric | Target |
 |--------|--------|
-| **Churn reduction** | [X% reduction in port-out rate within 90d] |
-| **IVR deflection** | [Y% of potential support contacts avoided] |
-| **NPS lift (cohort)** | [+Z NPS points within 90d] |
-| **Revenue protected** | [₹Xk/month in retained customer value] |
+| [Primary: matching your Intent above] | [X] |
+| [Secondary: matching your Intent above] | [Y] |
+| [Guard: max acceptable] | [Z] |
 
 ---
 

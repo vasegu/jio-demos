@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accenture Team Brief — Jio CX</title>
+
+  <style>
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Light.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Light.ttf') format('truetype');
+      font-weight: 300;
+    }
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Medium.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Medium.ttf') format('truetype');
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Bold.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Bold.ttf') format('truetype');
+      font-weight: 700;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue:       #0F3CC9;
+      --deep:       #0a2885;
+      --red:        #DA2441;
+      --green:      #00C853;
+      --gold:       #EFA73D;
+      --purple:     #7B1FA2;
+      --black:      #141414;
+      --grey:       #5C5C5C;
+      --grey-mid:   #8A8A8A;
+      --border:     #E4E4E4;
+      --tint:       #E7EBF8;
+      --bg-alt:     #F6F7FB;
+      --white:      #FFFFFF;
+      --font:       'JioType', 'Nunito', sans-serif;
+      --radius:     10px;
+      --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 68px; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); color: var(--black); background: var(--white); line-height: 1.6; font-size: 15px; }
+    h1, h2, h3, h4 { text-wrap: balance; line-height: 1.15; }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+
+    /* ─── Header ───────────────────────────────── */
+    .hd {
+      position: sticky; top: 0; z-index: 50;
+      height: 60px;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+    }
+    .hd__inner {
+      width: 100%; max-width: 1120px;
+      margin: 0 auto; padding: 0 56px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .hd__logo {
+      width: 32px; height: 32px;
+      background: var(--blue); border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .hd__logo span { color: #fff; font-size: 13px; font-weight: 700; }
+    .hd__title { font-size: 14px; font-weight: 700; }
+    .hd__divider { width: 1px; height: 16px; background: var(--border); }
+    .hd__label { font-size: 13px; color: var(--grey-mid); }
+    .hd__nav { margin-left: auto; display: flex; gap: 28px; }
+    .hd__nav a {
+      font-size: 13px; font-weight: 500; color: var(--grey);
+      text-decoration: none; transition: color 150ms;
+    }
+    .hd__nav a:hover { color: var(--blue); }
+
+    /* ─── Hero ─────────────────────────────────── */
+    .hero {
+      padding: 100px 0 88px;
+      background: linear-gradient(150deg, #fff 0%, var(--tint) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero__inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 56px;
+      display: grid; grid-template-columns: 1fr 360px;
+      gap: 72px; align-items: center;
+    }
+    .hero__kicker {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .hero__h1 {
+      font-size: 58px; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.06; color: var(--black); margin-bottom: 22px;
+    }
+    .hero__h1 em { color: var(--blue); font-style: normal; }
+    .hero__p {
+      font-size: 17px; color: var(--grey); line-height: 1.65;
+      max-width: 50ch; margin-bottom: 36px;
+    }
+    .hero__chips { display: flex; gap: 10px; flex-wrap: wrap; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border-radius: 100px;
+      border: 1px solid var(--border); background: var(--white);
+      font-size: 12px; font-weight: 500; color: var(--grey);
+    }
+    .chip__dot {
+      width: 7px; height: 7px; border-radius: 50%;
+    }
+    .chip__dot--green { background: var(--green); }
+
+    .hero__card {
+      background: var(--white); border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 32px rgba(15,60,201,0.07);
+      padding: 28px;
+    }
+    .hero__card-kicker {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 20px;
+    }
+    .stats { display: flex; flex-direction: column; }
+    .stat {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat:first-child { padding-top: 0; }
+    .stat:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat__n {
+      font-size: 30px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--black); line-height: 1;
+    }
+    .stat__n em { color: var(--blue); font-style: normal; }
+    .stat__l { font-size: 12px; color: var(--grey-mid); margin-top: 3px; }
+
+    /* ─── Sections (shared) ─────────────────────── */
+    .section { padding: 88px 0; border-bottom: 1px solid var(--border); }
+    .section--alt { background: var(--bg-alt); }
+    .section--dark { background: var(--blue); }
+
+    .kicker {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .kicker--blue { color: var(--blue); }
+    .kicker--faint { color: rgba(255,255,255,0.5); }
+
+    .sh {
+      font-size: 38px; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .sh--light { color: var(--white); }
+
+    .sl {
+      font-size: 16px; line-height: 1.65; color: var(--grey);
+      max-width: 58ch; margin-bottom: 52px;
+    }
+    .sl--light { color: rgba(255,255,255,0.65); }
+
+    /* ─── Context section ───────────────────────── */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: start;
+    }
+    .three-col {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px; align-items: start;
+    }
+
+    .fact { display: flex; flex-direction: column; gap: 8px; }
+    .fact + .fact { margin-top: 36px; }
+    .fact__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--blue);
+    }
+    .fact__h { font-size: 16px; font-weight: 700; color: var(--black); }
+    .fact__p { font-size: 14px; color: var(--grey); line-height: 1.65; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 6px; }
+    .tag {
+      font-size: 12px; font-weight: 600; padding: 4px 11px;
+      border-radius: 6px; background: var(--tint); color: var(--blue);
+    }
+
+    .cards { display: flex; flex-direction: column; gap: 12px; }
+    .card {
+      background: var(--white); border-radius: var(--radius);
+      border: 1px solid var(--border); border-left: 3px solid var(--border);
+      padding: 18px 20px;
+    }
+    .card--neg { border-left-color: #e8c3c8; }
+    .card--pos { border-left-color: #b3eece; }
+    .card__h { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+    .card__p { font-size: 13px; color: var(--grey); line-height: 1.6; }
+
+    /* ─── Vision section ────────────────────────── */
+    .stack { display: flex; flex-direction: column; gap: 4px; }
+    .layer {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 8px; padding: 13px 16px;
+    }
+    .layer__name {
+      font-size: 13px; font-weight: 700; color: var(--white);
+      margin-bottom: 2px;
+    }
+    .layer__detail {
+      font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.45;
+    }
+
+    .timeline {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 20px; padding: 8px 16px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 12px; font-weight: 600; color: var(--white);
+    }
+    .timeline__dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0;
+    }
+
+    .scen-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
+      margin-bottom: 6px;
+    }
+    .scen-note {
+      font-size: 12px; color: rgba(255,255,255,0.4);
+      font-style: italic; margin-bottom: 16px;
+    }
+    .scen-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .scen {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 8px; padding: 14px 16px;
+      transition: background 180ms var(--ease);
+    }
+    .scen:hover { background: rgba(255,255,255,0.12); }
+    .scen__name {
+      font-size: 13px; font-weight: 700;
+      color: var(--white); margin-bottom: 3px;
+    }
+    .scen__desc {
+      font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.45;
+    }
+
+    /* ─── Team section ──────────────────────────── */
+    .role-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .role {
+      background: var(--white); border-radius: var(--radius);
+      border: 1px solid var(--border); border-top: 3px solid var(--blue);
+      padding: 18px 20px; display: flex; flex-direction: column; gap: 5px;
+      transition: box-shadow 180ms var(--ease), transform 180ms var(--ease);
+    }
+    .role:hover {
+      box-shadow: 0 6px 24px rgba(15,60,201,0.09);
+      transform: translateY(-2px);
+    }
+    .role--lead    { border-top-color: var(--purple); }
+    .role--product { border-top-color: var(--green); }
+    .role--design  { border-top-color: var(--gold); }
+    .role--ops     { border-top-color: var(--red); }
+    .role--client  { border-top-color: var(--grey-mid); }
+
+    .role__track {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--grey-mid);
+    }
+    .role__name { font-size: 13px; font-weight: 700; color: var(--black); line-height: 1.3; }
+    .role__who  { font-size: 12px; color: var(--grey-mid); }
+    .role__desc { font-size: 12px; color: var(--grey); line-height: 1.55; margin-top: 5px; }
+
+    .legend {
+      display: flex; gap: 20px; flex-wrap: wrap;
+      margin-top: 28px; padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+    .legend__item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; color: var(--grey-mid);
+    }
+    .legend__pip {
+      width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0;
+    }
+    .pip--lead    { background: var(--purple); }
+    .pip--eng     { background: var(--blue); }
+    .pip--product { background: var(--green); }
+    .pip--design  { background: var(--gold); }
+    .pip--ops     { background: var(--red); }
+    .pip--client  { background: var(--grey-mid); }
+
+    /* ─── Footer ────────────────────────────────── */
+    .ft {
+      padding: 40px 0; background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+    }
+    .ft__inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 56px;
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .ft__brand { font-size: 13px; font-weight: 700; }
+    .ft__copy  { font-size: 12px; color: var(--grey-mid); margin-top: 2px; }
+    .ft__right { font-size: 11px; color: var(--grey-mid); }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="hd">
+  <div class="hd__inner">
+    <div class="hd__logo"><span>Jio</span></div>
+    <span class="hd__title">Jio CX</span>
+    <div class="hd__divider"></div>
+    <span class="hd__label">Accenture Team Brief — March 2026</span>
+    <nav class="hd__nav">
+      <a href="#context">Context</a>
+      <a href="#vision">Vision</a>
+      <a href="#team">Team</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero__inner">
+    <div>
+      <p class="hero__kicker">Welcome to the project</p>
+      <h1 class="hero__h1">Acting<br><em>before</em> the<br>customer calls.</h1>
+      <p class="hero__p">Reliance Jio has 500 million subscribers generating signals every day. We are building Jio Buddy — a proactive voice agent that reads those signals and acts on them before problems become complaints.</p>
+      <div class="hero__chips">
+        <div class="chip"><div class="chip__dot chip__dot--green"></div>Discovery Sprint Active</div>
+        <div class="chip">Jun 30 — Live in 2 regions</div>
+        <div class="chip">Accenture × Reliance Jio</div>
+      </div>
+    </div>
+
+    <div class="hero__card">
+      <p class="hero__card-kicker">Why this matters</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat__n">500<em>M+</em></div>
+          <div class="stat__l">Jio subscribers generating signals daily</div>
+        </div>
+        <div class="stat">
+          <div class="stat__n">1</div>
+          <div class="stat__l">proactive agent being built to act on them</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Context -->
+<section class="section" id="context">
+  <div class="wrap">
+    <p class="kicker kicker--blue">Context</p>
+    <h2 class="sh">Who is Jio, and what is the gap?</h2>
+    <p class="sl">To understand what we are building, you first need to understand the scale of Jio — and the distance between what it knows about its customers and what it does with that knowledge.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="fact">
+          <div class="fact__label">The company</div>
+          <div class="fact__h">Reliance Jio Infocomm Ltd.</div>
+          <div class="fact__p">India's largest telecom operator, launched in 2016. "Jio" means "live long" in Hindi. Built on the premise that every Indian deserves fast, affordable digital connectivity.</div>
+        </div>
+
+        <div class="fact">
+          <div class="fact__label">The platform</div>
+          <div class="fact__h">A super-app, not just a network</div>
+          <div class="fact__p">True5G and JioFiber are the backbone. Jio has expanded into entertainment, payments, commerce, and cloud — all unified in the MyJio super-app.</div>
+          <div class="tags">
+            <span class="tag">True5G</span>
+            <span class="tag">JioFiber</span>
+            <span class="tag">JioCinema</span>
+            <span class="tag">JioSaavn</span>
+            <span class="tag">JioMart</span>
+            <span class="tag">JioFinance</span>
+            <span class="tag">UPI</span>
+            <span class="tag">MyJio</span>
+          </div>
+        </div>
+
+        <div class="fact">
+          <div class="fact__label">The scale</div>
+          <div class="fact__h">500 million signals, unused</div>
+          <div class="fact__p">Every subscriber generates network events, billing patterns, usage behaviour, and expressed intent. This data is captured. It is not yet used to act proactively. That is the gap we are closing.</div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card card--neg">
+          <div class="card__h">Today: Reactive CX</div>
+          <div class="card__p">When a customer has a problem, they call. Or they silently churn. Jio responds after the fact, when the cost has already been incurred.</div>
+        </div>
+        <div class="card card--neg">
+          <div class="card__h">Missed moments</div>
+          <div class="card__p">A customer flies to Singapore — Jio doesn't know until the bill spikes. Network drops for three days before a port-out — Jio could have acted on day one. IPL is tonight — nobody configured the bandwidth.</div>
+        </div>
+        <div class="card card--neg">
+          <div class="card__h">Contact centre cost</div>
+          <div class="card__p">Millions of inbound calls every month for problems that were detectable in advance. Every call Jio Buddy prevents is a direct cost saving and an NPS point gained.</div>
+        </div>
+        <div class="card card--pos">
+          <div class="card__h">The opportunity</div>
+          <div class="card__p">The signals are already in the data. Network degradation precedes churn by 72 hours. Travel intent precedes the roaming bill by days. We need an agent that reads them and acts.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vision -->
+<section class="section section--dark" id="vision">
+  <div class="wrap">
+    <p class="kicker kicker--faint">The vision</p>
+    <h2 class="sh sh--light">Jio Buddy</h2>
+    <p class="sl sl--light">A proactive voice agent that acts on customer signals across the full CX lifecycle: churn prevention, cross-sell, experience improvement, contact deflection.</p>
+
+    <p style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:12px;">The stack</p>
+    <div class="stack" style="max-width: 500px;">
+      <div class="layer">
+        <div class="layer__name">Signal Layer</div>
+        <div class="layer__detail">Flink + Kafka — real-time streams of network, billing, behavioural, and contextual data</div>
+      </div>
+      <div class="layer">
+        <div class="layer__name">Memory Store</div>
+        <div class="layer__detail">Firestore + Databricks — customer context, signal history, preference state</div>
+      </div>
+      <div class="layer">
+        <div class="layer__name">Agent</div>
+        <div class="layer__detail">Gemini 2.5 Flash + ADK — decision logic, Jio Buddy persona, response synthesis</div>
+      </div>
+      <div class="layer">
+        <div class="layer__name">Voice</div>
+        <div class="layer__detail">Gemini Live API + IndicWhisper — natural conversation in Indian languages</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="timeline__dot"></div>
+      Live in 2 regions — June 30, 2026
+    </div>
+  </div>
+</section>
+
+<!-- Scenarios -->
+<section class="section" id="scenarios">
+  <div class="wrap">
+    <p class="kicker kicker--blue">Reference material</p>
+    <h2 class="sh">7 demo scenarios</h2>
+    <p class="sl">Already designed and built in WS0-demo. Browse them to see what Jio Buddy looks like in action.</p>
+
+    <div class="scen-grid" style="grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: none;">
+      <div class="scen" style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; color: var(--black);">
+        <div class="scen__name" style="color: var(--black); margin-bottom: 4px; font-size: 13px;">Slow Wi-Fi</div>
+        <div class="scen__desc" style="color: var(--grey); font-size: 12px;">Buddy diagnoses congestion and caps background apps before the customer notices</div>
+      </div>
+      <div class="scen" style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; color: var(--black);">
+        <div class="scen__name" style="color: var(--black); margin-bottom: 4px; font-size: 13px;">Singapore Trip</div>
+        <div class="scen__desc" style="color: var(--grey); font-size: 12px;">Buddy spots a travel mention and activates the roaming pack before the flight</div>
+      </div>
+      <div class="scen" style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; color: var(--black);">
+        <div class="scen__name" style="color: var(--black); margin-bottom: 4px; font-size: 13px;">Match Night</div>
+        <div class="scen__desc" style="color: var(--grey); font-size: 12px;">IPL tonight — Smart TV gets Stream Lane priority, Rishika stays on Study Lane</div>
+      </div>
+      <div class="scen" style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; color: var(--black);">
+        <div class="scen__name" style="color: var(--black); margin-bottom: 4px; font-size: 13px;">Running Low</div>
+        <div class="scen__desc" style="color: var(--grey); font-size: 12px;">6 days left, 1.3 GB remaining — Buddy offers a booster before the cliff hits</div>
+      </div>
+      <div class="scen" style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; color: var(--black);">
+        <div class="scen__name" style="color: var(--black); margin-bottom: 4px; font-size: 13px;">Weekly Shop</div>
+        <div class="scen__desc" style="color: var(--grey); font-size: 12px;">Buddy rebuilds the grocery basket from history and confirms in one voice turn</div>
+      </div>
+      <div class="scen" style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; color: var(--black);">
+        <div class="scen__name" style="color: var(--black); margin-bottom: 4px; font-size: 13px;">Pay Rahul</div>
+        <div class="scen__desc" style="color: var(--grey); font-size: 12px;">UPI payment with fraud detection — anomalous charge blocked silently</div>
+      </div>
+      <div class="scen" style="background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; color: var(--black);">
+        <div class="scen__name" style="color: var(--black); margin-bottom: 4px; font-size: 13px;">MyJio Home</div>
+        <div class="scen__desc" style="color: var(--grey); font-size: 12px;">Full super-app check — balance, JioSlices active, tonight's IPL, Rishika's exams</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sprint -->
+<section class="section section--alt">
+  <div class="wrap">
+    <p class="kicker kicker--blue">The sprint</p>
+    <h2 class="sh">Three streams. Two weeks.</h2>
+    <p class="sl">March 24–April 7, 2026. Three parallel workstreams from day one. By end of week 2, every critical question has an answer.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+      <!-- Stream 1 -->
+      <div style="background: var(--tint); border-radius: var(--radius); border: 1px solid rgba(15,60,201,0.15); overflow: hidden;">
+        <div style="padding: 16px 18px; border-bottom: 1px solid rgba(15,60,201,0.15);">
+          <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px;">Stream 1</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--black);">Signal Discovery</div>
+        </div>
+        <div style="padding: 18px; min-height: 140px; display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-size: 12px; color: var(--blue); font-weight: 600; line-height: 1.7;">
+            Map the data<br>
+            Hypothesis hunt<br>
+            Run H1–H8 skills<br>
+            Validate findings<br>
+            Pass governance gate
+          </div>
+        </div>
+        <div style="padding: 14px 18px; background: rgba(15,60,201,0.06); border-top: 1px solid rgba(15,60,201,0.15);">
+          <div style="font-size: 11px; font-weight: 700; color: var(--blue); margin-bottom: 2px;">Output A</div>
+          <div style="font-size: 12px; font-weight: 600; color: var(--black);">Which signals should Jio Buddy act on?</div>
+        </div>
+      </div>
+
+      <!-- Stream 2 -->
+      <div style="background: var(--blue); border-radius: var(--radius); border: 1px solid var(--blue); overflow: hidden;">
+        <div style="padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,0.1); background: var(--deep);">
+          <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px;">Stream 2</div>
+          <div style="font-size: 14px; font-weight: 700; color: white;">Experience Design</div>
+        </div>
+        <div style="padding: 18px; min-height: 140px; display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 600; line-height: 1.7;">
+            Voice scripts<br>
+            Guardrails<br>
+            Conversation flow<br>
+            Operational rules<br>
+            NPS metrics
+          </div>
+        </div>
+        <div style="padding: 14px 18px; background: var(--deep);">
+          <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.6); margin-bottom: 2px;">Output B</div>
+          <div style="font-size: 12px; font-weight: 600; color: white;">Can we build the experience we want?</div>
+        </div>
+      </div>
+
+      <!-- Stream 3 -->
+      <div style="background: var(--tint2); border-radius: var(--radius); border: 1px solid rgba(15,60,201,0.12); overflow: hidden;">
+        <div style="padding: 16px 18px; border-bottom: 1px solid rgba(15,60,201,0.12);">
+          <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px;">Stream 3</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--black);">Infrastructure & Privacy</div>
+        </div>
+        <div style="padding: 18px; min-height: 140px; display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-size: 12px; color: var(--blue); font-weight: 600; line-height: 1.7;">
+            Data access audit<br>
+            API gap analysis<br>
+            Privacy compliance<br>
+            Frequency policy<br>
+            Target architecture
+          </div>
+        </div>
+        <div style="padding: 14px 18px; background: rgba(15,60,201,0.05); border-top: 1px solid rgba(15,60,201,0.12);">
+          <div style="font-size: 11px; font-weight: 700; color: var(--blue); margin-bottom: 2px;">Output C</div>
+          <div style="font-size: 12px; font-weight: 600; color: var(--black);">What does the platform need to support it?</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 28px; text-align: center; font-size: 13px; font-weight: 600; color: var(--blue); letter-spacing: 0.03em;">
+      A + B + C = Jio Buddy ready for phase 2
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="section section--alt" id="team">
+  <div class="wrap">
+    <p class="kicker kicker--blue">The team</p>
+    <h2 class="sh">Your team</h2>
+    <p class="sl">Accenture and Reliance Jio working as one squad across the discovery and build phases.</p>
+
+    <div class="role-grid">
+      <div class="role role--lead">
+        <div class="role__track">Leadership</div>
+        <div class="role__name">Experience Lead</div>
+        <div class="role__who">(TBD)</div>
+        <div class="role__desc">Sets the CX vision. Prioritises signals, approves experience briefs, chairs design reviews.</div>
+      </div>
+      <div class="role role--product">
+        <div class="role__track">Product</div>
+        <div class="role__name">Product Manager</div>
+        <div class="role__who">Mark.Farbrace</div>
+        <div class="role__desc">Translates validated signals into PRDs. Owns the experience roadmap from discovery to launch.</div>
+      </div>
+      <div class="role role--lead">
+        <div class="role__track">Leadership</div>
+        <div class="role__name">Value Orchestrator & Scrum Lead</div>
+        <div class="role__who">David.g.miller</div>
+        <div class="role__desc">Runs the sprint. Manages dependencies, resolves blockers, keeps stakeholders aligned.</div>
+      </div>
+      <div class="role">
+        <div class="role__track">Engineering</div>
+        <div class="role__name">Domain Ontology Architect</div>
+        <div class="role__who">Mark.Welsh</div>
+        <div class="role__desc">Maps signals to Jio's data model. Defines the signal schema. Ensures discovery queries reflect production reality.</div>
+      </div>
+      <div class="role">
+        <div class="role__track">Engineering</div>
+        <div class="role__name">Squad Lead</div>
+        <div class="role__who">Pulak.a.agrawal</div>
+        <div class="role__desc">Leads discovery skill runs. Reviews finding quality against the governance gate. Designs hypotheses H3–H8.</div>
+      </div>
+      <div class="role">
+        <div class="role__track">Engineering</div>
+        <div class="role__name">Agentic Integration Architect</div>
+        <div class="role__who">(India)</div>
+        <div class="role__desc">Designs the ADK integration, voice and NLU pipeline, and guardrail enforcement logic.</div>
+      </div>
+      <div class="role">
+        <div class="role__track">Science</div>
+        <div class="role__name">Applied AI Scientist</div>
+        <div class="role__who">Christopher.malloy</div>
+        <div class="role__desc">Validates statistical rigour of every finding. Sets confidence thresholds, QAs precision and recall claims.</div>
+      </div>
+      <div class="role role--design">
+        <div class="role__track">Design</div>
+        <div class="role__name">Conversational & Ops Designer</div>
+        <div class="role__who">Megan.Charles</div>
+        <div class="role__desc">Scripts Jio Buddy's voice. Designs guardrails, escalation moments, and operational constraints.</div>
+      </div>
+      <div class="role">
+        <div class="role__track">Engineering</div>
+        <div class="role__name">FD AI Engineer 1</div>
+        <div class="role__who">(India)</div>
+        <div class="role__desc">Runs discovery skills, builds analysis notebooks, and executes hypothesis runs against Databricks and Supabase.</div>
+      </div>
+      <div class="role">
+        <div class="role__track">Engineering</div>
+        <div class="role__name">FD AI Engineer 2</div>
+        <div class="role__who">v.eguren</div>
+        <div class="role__desc">Leads signal discovery, validates findings against the governance gate, scaffolds experiences from passing signals.</div>
+      </div>
+      <div class="role role--ops">
+        <div class="role__track">Security</div>
+        <div class="role__name">Trust & AI Engineer</div>
+        <div class="role__who">Palash.Surana</div>
+        <div class="role__desc">Privacy audit and compliance review. Enforces contact frequency policy and manages opt-out logic.</div>
+      </div>
+      <div class="role role--client">
+        <div class="role__track">Reliance</div>
+        <div class="role__name">Business SME</div>
+        <div class="role__who">&lt;Reliance&gt;</div>
+        <div class="role__desc">Validates signals against real behaviour. Flags blind spots and provides domain context the data cannot reveal.</div>
+      </div>
+      <div class="role role--client">
+        <div class="role__track">Reliance</div>
+        <div class="role__name">Platform Infrastructure Engineer</div>
+        <div class="role__who">&lt;Reliance&gt;</div>
+        <div class="role__desc">Manages Databricks and Flink pipeline access. Owns signal delivery infrastructure.</div>
+      </div>
+      <div class="role role--client">
+        <div class="role__track">Reliance</div>
+        <div class="role__name">Site Reliability Engineer</div>
+        <div class="role__who">&lt;Reliance&gt;</div>
+        <div class="role__desc">Designs production safety guardrails. Owns monitoring, alerting, and rollback procedures.</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend__item"><div class="legend__pip pip--lead"></div>Leadership</div>
+      <div class="legend__item"><div class="legend__pip pip--eng"></div>Engineering</div>
+      <div class="legend__item"><div class="legend__pip pip--product"></div>Product</div>
+      <div class="legend__item"><div class="legend__pip pip--design"></div>Design</div>
+      <div class="legend__item"><div class="legend__pip pip--ops"></div>Security</div>
+      <div class="legend__item"><div class="legend__pip pip--client"></div>Reliance-led</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="ft">
+  <div class="ft__inner">
+    <div>
+      <div class="ft__brand">Reliance Jio × Accenture</div>
+      <div class="ft__copy">Discovery Sprint — March 24 to April 7, 2026</div>
+    </div>
+    <div class="ft__right">Copyright Accenture 2026. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>

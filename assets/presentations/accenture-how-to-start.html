@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Start — Jio CX Discovery</title>
+
+  <style>
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Light.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Medium.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'JioType';
+      src: url('../../brand-assets/fonts/jiotype/JioTypeW04-Bold.woff') format('woff'),
+           url('../../brand-assets/fonts/jiotype/JioTypeW04-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --jio-blue: #0F3CC9;
+      --jio-deep-blue: #0a2885;
+      --jio-red: #DA2441;
+      --jio-green: #00C853;
+      --jio-gold: #EFA73D;
+      --jio-purple: #7B1FA2;
+      --jio-black: #141414;
+      --jio-grey: rgba(0,0,0,0.65);
+      --jio-grey-muted: rgba(0,0,0,0.35);
+      --jio-border: #E0E0E0;
+      --jio-light-tint: #E7EBF8;
+      --jio-off-white: #FAFAFA;
+      --jio-white: #FFFFFF;
+      --jio-font: 'JioType', 'Nunito', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--jio-font);
+      color: var(--jio-black);
+      background: var(--jio-white);
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Slide container — 16:9 aspect ratio */
+    .slide {
+      width: 1440px;
+      height: 810px;
+      margin: 0 auto;
+      padding: 40px 56px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Header area */
+    .slide-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--jio-grey);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .slide-title {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--jio-black);
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    /* Two-column layout */
+    .content-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      flex: 1;
+      min-height: 0;
+      margin-bottom: 20px;
+    }
+
+    /* Left: Key files */
+    .key-files {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .files-header {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--jio-black);
+      margin-bottom: 8px;
+    }
+
+    .file-item {
+      background: var(--jio-light-tint);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .file-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--jio-blue);
+    }
+
+    .file-desc {
+      font-size: 10px;
+      color: var(--jio-grey);
+      line-height: 1.5;
+    }
+
+    /* Right: Entry points */
+    .entry-points {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .entry-header {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--jio-black);
+      margin-bottom: 8px;
+    }
+
+    .entry-item {
+      background: var(--jio-white);
+      border: 1px solid var(--jio-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .entry-cmd {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--jio-blue);
+      background: rgba(15, 60, 201, 0.06);
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .entry-when {
+      font-size: 10px;
+      color: var(--jio-grey);
+      margin-top: 2px;
+    }
+
+    /* The loop */
+    .loop-section {
+      background: var(--jio-light-tint);
+      border: 1px solid rgba(15, 60, 201, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .loop-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--jio-black);
+      margin-bottom: 10px;
+    }
+
+    .loop-steps {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .loop-step {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--jio-grey);
+      padding: 4px 8px;
+      background: var(--jio-white);
+      border-radius: 4px;
+      border: 1px solid var(--jio-border);
+    }
+
+    .loop-arrow {
+      font-size: 12px;
+      color: var(--jio-blue);
+      font-weight: 700;
+    }
+
+    /* Quick wins */
+    .quick-wins {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .win-item {
+      background: var(--jio-white);
+      border: 1px solid var(--jio-border);
+      border-left: 3px solid var(--jio-gold);
+      border-radius: 6px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .win-item.blocked {
+      border-left-color: var(--jio-red);
+    }
+
+    .win-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--jio-black);
+    }
+
+    .win-desc {
+      font-size: 9px;
+      color: var(--jio-grey);
+    }
+
+    /* Footer */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--jio-border);
+      font-size: 9px;
+      color: var(--jio-grey-muted);
+    }
+    .slide-footer span {
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slide">
+
+  <!-- Header -->
+  <div class="slide-eyebrow">Getting started</div>
+  <div class="slide-title">How to Begin</div>
+
+  <!-- Two columns: Key files + Entry points -->
+  <div class="content-cols">
+
+    <!-- Left: Key Files -->
+    <div class="key-files">
+      <div class="files-header">📖 Read These First (In Order)</div>
+
+      <div class="file-item">
+        <div class="file-name">STATUS.md</div>
+        <div class="file-desc">8-row snapshot: what passed, what's testing, next blockers. Read before every sync.</div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">FINDINGS.md</div>
+        <div class="file-desc">Detailed write-ups of validated signals with evidence, precision, and ticket links.</div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">WS1-discovery/CONTEXT.md</div>
+        <div class="file-desc">Signal interpretation frame, taxonomy, governance gate. What counts as a "good finding."</div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">WS2-mvp/docs/ARCHITECTURE.md</div>
+        <div class="file-desc">Tech spec: Flink, Firestore, ADK, Gemini integration. For engineers.</div>
+      </div>
+    </div>
+
+    <!-- Right: Entry Points -->
+    <div class="entry-points">
+      <div class="entry-header">🎯 Your Entry Points</div>
+
+      <div class="entry-item">
+        <div class="entry-cmd">/basecamp</div>
+        <div class="entry-when">Day 1: map data, build hypothesis list, identify signal opportunities</div>
+      </div>
+
+      <div class="entry-item">
+        <div class="entry-cmd">/go_hunt</div>
+        <div class="entry-when">Run hypothesis skills, validate signals, scaffold discoveries</div>
+      </div>
+
+      <div class="entry-item">
+        <div class="entry-cmd">/H1 /H2 /H3 ... /H8</div>
+        <div class="entry-when">Test specific hypotheses. H3 running this week; H5 blocked.</div>
+      </div>
+
+      <div class="entry-item">
+        <div class="entry-cmd">/log_session</div>
+        <div class="entry-when">After each run: parse findings, update benchmarks, plan next.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- The Discovery Loop -->
+  <div class="loop-section">
+    <div class="loop-title">The Discovery Loop</div>
+    <div class="loop-steps">
+      <div class="loop-step">Question</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Hypothesis</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Skill Run</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Finding</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">FINDINGS.md</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Ticket</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Experience</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Metrics</div>
+    </div>
+  </div>
+
+  <!-- This Week -->
+  <div style="margin-bottom: 12px;">
+    <div class="files-header">📅 This Week (Mar 24–28)</div>
+    <div class="quick-wins">
+      <div class="win-item">
+        <div class="win-title">Mon–Wed: Team Intake</div>
+        <div class="win-desc">Read files. Attend architecture overview. Get Databricks + Linear access.</div>
+      </div>
+      <div class="win-item">
+        <div class="win-title">Wed: H4 Experience Scaffold</div>
+        <div class="win-desc">v.eguren scaffolds validated signal. Product reviews brief.</div>
+      </div>
+      <div class="win-item">
+        <div class="win-title">Thu: H3 Skill Run</div>
+        <div class="win-desc">Pulak runs Mobile Switching hypothesis. Forward-deployed engineers support.</div>
+      </div>
+      <div class="win-item blocked">
+        <div class="win-title">BLOCKED: H5 Data Access</div>
+        <div class="win-desc">David.G to secure Databricks recharge table. Unblock Pulak for H5 run.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <div><span>Reliance Jio</span> × <span>Accenture</span></div>
+    <div><span>Copyright Accenture 2026</span></div>
+  </div>
+
+</div>
+
+</body>
+</html>

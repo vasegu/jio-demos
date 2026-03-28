@@ -1,5 +1,8 @@
 # JIO CX — STATUS
 
+> ⚠️ **Example format** — The rows below illustrate what a completed status board looks like.
+> They are not validated findings. Update with real results as hypothesis skills are run.
+
 _Last updated: 2026-03-25_
 
 | Hypothesis | Finding | Ticket | Experience | Shadow | Live |
